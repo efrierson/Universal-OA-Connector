@@ -1,0 +1,69 @@
+body {
+    font-family: Railway, Helvetica Neue, Helvetica, sans-serif;
+}
+
+.labelfor {
+    color:#666666;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.warningmessage {
+    padding:10px;
+    background-color:#FEEFB3;
+    color:#9F6000;
+    font-weight: bold;
+    margin:10px;
+}
+
+#login {
+    margin: 20px auto;
+    width: 340px;
+    padding: 20px;
+    border: thin solid #999999;
+    background-color: #EEEEEE;
+    text-align: center;
+}
+
+#login input {
+    margin: 0 auto 10px;
+}
+
+#login input[type="text"] {
+    width: 300px;
+    height: 30px;
+    font-size: 18px;
+    border: thin solid #CCCCCC;
+}
+
+#login input[type="password"] {
+    width: 300px;
+    height: 30px;
+    font-size: 18px;
+    border: thin solid #CCCCCC;
+}
+
+#login button {
+    width: 300px;
+    height: 30px;
+    font-size: 18px;
+    border: thin solid #CCCCCC;
+    background-color: #333333;
+    color: white;
+}
+
+#results {
+    margin: 20px auto;
+    width: 90%;
+    padding: 20px;
+    border: thin solid #999999;
+    background-color: #EEEEEE;
+    text-align: left;
+    font-family: Consolas,Courier,monospace;
+}
+
+#ils-type select {
+    width:300px;
+    height:30px;
+    font-size: 18px;
+}
