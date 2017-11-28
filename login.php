@@ -29,6 +29,9 @@ $type = $config->type;
         <?php
         if (isset($_GET['verbose']) && ($_GET['verbose'] == "Y")) {
         ?>
+        <div id="redirect">
+            <a href="redirect.php?verbose=Y">Verbose Redirect</a>
+        </div>
         <div id="results">
             <strong>SIP2 Response will appear here.</strong>
         </div>

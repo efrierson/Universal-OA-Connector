@@ -22,6 +22,15 @@ if (strlen($user_returnData) > 0) {
         $request_json["displayName"] = "Anonymous";        
     }
     $request_json["returnData"] = $user_returnData;
+
+    $request_json["attributes"] = [];
+    if (isset($_SESSION["address"])) {
+        $request_json["attributes"]["postalAddress"] = $_SESSION["address"];
+    }
+    if (isset($_SESSION["category"])) {
+        $request_json["attributes"]["department"] = $_SESSION["category"];        
+    }
+
     $data_string = json_encode($request_json);
 
     $url = $oa_endpoint;
@@ -53,6 +62,7 @@ if (strlen($user_returnData) > 0) {
         echo "Request JSON: <textarea>".$data_string."</textarea><hr />";
         echo "Redirect URL: <textarea>".$redirect_url->sessionInitiatorUrl."</textarea><br />";
         echo "OA Response: <textarea>".var_export($redirect_url,TRUE)."</textarea>";
+        echo '<a href="'.$redirect_url->sessionInitiatorUrl.'" target="_blank">Follow the Redirect Link</a>';
     } else {
         if (isset($redirect_url->sessionInitiatorUrl) && (strlen($redirect_url->sessionInitiatorUrl) > 0)) {
             header("Location: ".$redirect_url->sessionInitiatorUrl);
