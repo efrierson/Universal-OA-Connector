@@ -30,13 +30,6 @@ if (strlen($user_returnData) > 0) {
         }
     }
 
-    if (isset($_SESSION["postalAddress"])) {
-        $request_json["attributes"]["postalAddress"] = $_SESSION["address"];
-    }
-    if (isset($_SESSION["department"])) {
-        $request_json["attributes"]["department"] = $_SESSION["category"];        
-    }
-
     $data_string = json_encode($request_json);
 
     $url = $oa_endpoint;
