@@ -82,11 +82,13 @@ if (isset($response["variable"]["BL"][0]) && isset($response["variable"]["CQ"][0
     if (isset($response["variable"]["AE"][0])) {
         $_SESSION["fullname"] = $response["variable"]["AE"][0];
     }
+
+    $_SESSION["attributes"] = [];
     if (isset($response["variable"]["XA"][0])) {
-        $_SESSION["category"] = $response["variable"]["XA"][0];
+        $_SESSION["attributes"]["department"] = $response["variable"]["XA"][0];
     }
     if (isset($response["variable"]["BD"][0])) {
-        $_SESSION["address"] = trim($response["variable"]["BD"][0]);
+        $_SESSION["attributes"]["postalAddress"] = trim($response["variable"]["BD"][0]);
     }    
     $_SESSION["uid"] = $codex->decrypt($encrypted_un);
     $_SESSION["custid"] = $json_data->custid;

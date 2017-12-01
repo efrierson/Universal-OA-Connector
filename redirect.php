@@ -24,10 +24,16 @@ if (strlen($user_returnData) > 0) {
     $request_json["returnData"] = $user_returnData;
 
     $request_json["attributes"] = [];
-    if (isset($_SESSION["address"])) {
+    if (isset($_SESSION["attributes"])) {
+        foreach ($_SESSION["attributes"] as $key => $val) {
+            $request_json["attributes"][$key] = $val;    
+        }
+    }
+
+    if (isset($_SESSION["postalAddress"])) {
         $request_json["attributes"]["postalAddress"] = $_SESSION["address"];
     }
-    if (isset($_SESSION["category"])) {
+    if (isset($_SESSION["department"])) {
         $request_json["attributes"]["department"] = $_SESSION["category"];        
     }
 
