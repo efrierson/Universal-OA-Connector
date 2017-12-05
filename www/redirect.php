@@ -23,8 +23,8 @@ if (strlen($user_returnData) > 0) {
     }
     $request_json["returnData"] = $user_returnData;
 
-    $request_json["attributes"] = [];
     if (isset($_SESSION["attributes"])) {
+        $request_json["attributes"] = [];        
         foreach ($_SESSION["attributes"] as $key => $val) {
             $request_json["attributes"][$key] = $val;    
         }
@@ -56,6 +56,7 @@ if (strlen($user_returnData) > 0) {
     $redirect_url = json_decode($html);
 
     if (isset($_GET['verbose'])) {
+        echo "Session Data: ".var_dump($_SESSION)."<br/><br/>";
         echo "Request URL: ".$url."<br/><br />";
         echo "Request Headers: ".var_export($headers,TRUE)."<br/><br/>";
         echo "Request JSON: <textarea>".$data_string."</textarea><hr />";

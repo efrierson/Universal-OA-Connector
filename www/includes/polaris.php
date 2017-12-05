@@ -79,7 +79,7 @@
         //echo "<br /><strong>Hash created using PAPI Access Key:</strong> " . $sha1_sig . "<br />";
         return $sha1_sig;
       }
-      function getUser($polarisAccessID,$PAPIKey,$Pdomain,$patronpassword,$patronID,$returnData){
+      function getUser($polarisAccessID,$PAPIKey,$Pdomain,$patronpassword,$patronID,$returnData,$custID){
         $connector_response = [];
         //echo "<strong>Connect Patron ".$patronID."</strong><br/><br/>";
 
