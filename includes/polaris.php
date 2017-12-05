@@ -153,7 +153,8 @@
           $_SESSION['uid'] = $patronID;
           $_SESSION['returnData'] = $returnData;
           $connector_response['valid'] = "N";
-          $connector_response['message'] = $xmlresult->ErrorMessage;
+          $connector_response['message'] = (string)$xmlresult->ErrorMessage;
+
           $connector_response['returnData'] = $returnData;
         }
         $connector_response = json_encode($connector_response);
