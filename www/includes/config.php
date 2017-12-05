@@ -8,7 +8,7 @@
     echo var_export($json_data,TRUE);
     
     $custid = $json_data->custid;
-    $filename = "../conf/".$custid.".json";
+    $filename = "../../conf/".$custid.".json";
     $filewrite = file_put_contents($filename, $post);
     $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     $actual_link = str_replace("includes/config.php","login.php?organization=".$custid,$actual_link);

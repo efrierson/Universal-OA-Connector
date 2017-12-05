@@ -4,7 +4,7 @@ if (!(isset($_SESSION['valid']) && ($_SESSION['valid'] == "Y"))) {
     die("Something went wrong.");
 }
 
-$config = json_decode(file_get_contents('conf/'.$_SESSION['custid'].'.json'));
+$config = json_decode(file_get_contents('../conf/'.$_SESSION['custid'].'.json'));
 $oa_connectionid = $config->oaconnectionid;
 $oa_endpoint = $config->oaendpoint;
 $oa_apikey = $config->oaapikey;

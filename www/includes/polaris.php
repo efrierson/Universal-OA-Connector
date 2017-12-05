@@ -20,7 +20,7 @@
     ////echo "POST: ".$post."<br/><br/>";
     $user_data = json_decode($post);
 
-    $config_data = json_decode(file_get_contents('../conf/'.$user_data->custid.'.json'));
+    $config_data = json_decode(file_get_contents('../../conf/'.$user_data->custid.'.json'));
 
     $encrypted_patron_un = $user_data->un;
     $encrypted_patron_pw = $user_data->pw;
