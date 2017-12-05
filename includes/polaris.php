@@ -35,11 +35,12 @@
     $patronID = $codex->decrypt($user_data->un);
     $patronpassword = $codex->decrypt($user_data->pw);
     $returnData = $user_data->rd;
+    $custID = $user_data->custid;
     //$patronID = "21668012345678";
     //$patronpassword = "1234";
 
     if ($patronID != "" && $patronpassword != ""){
-      getUser($polarisAccessID,$PAPIKey,$Pdomain,$patronpassword,$patronID,$returnData);
+      getUser($polarisAccessID,$PAPIKey,$Pdomain,$patronpassword,$patronID,$returnData,$custID);
     }
     else{
       $debug .= "BAD USERNAME OR PASSWORD";
@@ -145,6 +146,7 @@
           $connector_response['fullName'] = $fullName;
           $_SESSION['valid'] = "Y";
           $_SESSION['uid'] = $patronID;
+          $_SESSION['custid'] = $custID;
           $_SESSION['fullname'] = $fullName;
           $_SESSION['returnData'] = $returnData;
         }
