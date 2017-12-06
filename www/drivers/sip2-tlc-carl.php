@@ -12,8 +12,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once("encryption.php");
-require_once("sip2.class.php");
+require_once("../includes/encryption.php");
+require_once("../includes/sip2.class.php");
 $mysip = new sip2;
 
 $post = file_get_contents('php://input');
@@ -70,7 +70,7 @@ $mysip->disconnect();
 
 $connectorResponse = [];
 
-if (isset($response["variable"]["BL"][0]) && isset($response["variable"]["CQ"][0]) && ($response["variable"]["CQ"][0] == "Y") && ($response["variable"]["BL"][0] == "Y")) {
+if (isset($response["variable"]["BL"][0]) && isset($response["variable"]["CQ"][0]) && ($response["variable"]["CQ"][0] == "Y") && ($response["variable"]["BL"][0] == "Y") && !(isset($response["variable"]["AF"][0]))) {
     if (isset($json_data->rd)) {
         $returnData = $json_data->rd;
         $_SESSION['returnData'] = $returnData;
@@ -82,6 +82,14 @@ if (isset($response["variable"]["BL"][0]) && isset($response["variable"]["CQ"][0
     if (isset($response["variable"]["AE"][0])) {
         $_SESSION["fullname"] = $response["variable"]["AE"][0];
     }
+
+    $_SESSION["attributes"] = [];
+    if (isset($response["variable"]["XA"][0])) {
+        $_SESSION["attributes"]["department"] = $response["variable"]["XA"][0];
+    }
+    if (isset($response["variable"]["BD"][0])) {
+        $_SESSION["attributes"]["postalAddress"] = trim($response["variable"]["BD"][0]);
+    }    
     $_SESSION["uid"] = $codex->decrypt($encrypted_un);
     $_SESSION["custid"] = $json_data->custid;
     $connectorResponse["valid"] = "Y";

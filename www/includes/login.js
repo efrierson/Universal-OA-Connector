@@ -69,9 +69,9 @@ function oalogin () {
     console.log(payload);
     
     if (type == "tlc-carl-sip2") {
-        var pwcheck = "includes/sip2-tlc-carl.php";        
+        var pwcheck = "drivers/sip2-tlc-carl.php";        
     } else if (type == "polaris") {
-        var pwcheck = "includes/polaris.php";
+        var pwcheck = "drivers/polaris.php";
     } else {
         var pwcheck = "unknown";
     }
