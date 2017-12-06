@@ -3,7 +3,7 @@ session_start();
 if ((!isset($_GET['organization'])) || (!isset($_GET['returnData']))) {
     die("Organization ID or returnData not set.");
 }
-$config = json_decode(file_get_contents('conf/'.$_GET['organization'].'.json'));
+$config = json_decode(file_get_contents('../conf/'.$_GET['organization'].'.json'));
 $type = $config->type;
 
 ?>
