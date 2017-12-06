@@ -4,7 +4,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <script type="text/javascript" src="includes/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="includes/jsencrypt.min.js"></script>
-        <script type="text/javascript" src="includes/login.js"></script>
+        <script type="text/javascript" src="includes/config.js"></script>
         <link rel="stylesheet" href="includes/login.css" />
     </head>
     <body>
