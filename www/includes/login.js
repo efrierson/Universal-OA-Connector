@@ -1,4 +1,37 @@
 
+function brandingconfig () {
+    $("#results").html('<img src="includes/loading_sm.gif" />');
+
+    var custid = $('#custid').val();
+    var logo = $('#logo').val();
+    var barcodelabel = $('#barcode-label').val();
+    var barcodeplaceholder = $('#barcode-placeholder').val();
+    var pinlabel = $('#pin-label').val();
+    var pinplaceholder = $('#pin-placeholder').val();
+    var titletext = $('#titletext').val();
+    var helptext = $('#helptext').val();
+    var loginbutton = $('#login-button').val();
+
+    var payload = {loginbutton:loginbutton,logo:logo,barcodelabel:barcodelabel,barcodeplaceholder:barcodeplaceholder,pinlabel:pinlabel,pinplaceholder:pinplaceholder,helptext:helptext,titletext:titletext,custid:custid};    
+
+    var url = "includes/config-branding.php";
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: JSON.stringify(payload),
+        success: function(data) {
+            $("#results").html(data);
+        },
+        error: function(xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            console.log(err.Message);
+        }
+    });
+    
+}
+
+
 function oaconfig () {
     $("#results").html('<img src="includes/loading_sm.gif" />');
     var encrypt = new JSEncrypt();
