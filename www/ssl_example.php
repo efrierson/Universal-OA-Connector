@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 // 7486
 $connection = ssh2_connect('demoapp.carlconnect.com', 22);
-ssh2_auth_pubkey_file($connection, 'ebscosip', 'keys/tlc_ebsco.pub', 'keys/tlc_ebsco');
+ssh2_auth_pubkey_file($connection, 'ebscosip', '../keys/tlc_ebsco.pub', '../keys/tlc_ebsco');
 
 $tunnel_host = 'demoapp.carlconnect.com';
 $tunnel_port = 6001;

@@ -21,7 +21,7 @@ $post = file_get_contents('php://input');
 //echo "POST: ".$post."<br/><br/>";
 $json_data = json_decode($post);
 
-$config = json_decode(file_get_contents('../conf/'.$json_data->custid.'.json'));
+$config = json_decode(file_get_contents('../../conf/'.$json_data->custid.'.json'));
 
 $encrypted_un = $json_data->un;
 $encrypted_pw = $json_data->pw;
@@ -70,7 +70,7 @@ $mysip->disconnect();
 
 $connectorResponse = [];
 
-if (isset($response["variable"]["BL"][0]) && isset($response["variable"]["CQ"][0]) && ($response["variable"]["CQ"][0] == "Y") && ($response["variable"]["BL"][0] == "Y")) {
+if (isset($response["variable"]["BL"][0]) && isset($response["variable"]["CQ"][0]) && ($response["variable"]["CQ"][0] == "Y") && ($response["variable"]["BL"][0] == "Y") && !(isset($response["variable"]["AF"][0]))) {
     if (isset($json_data->rd)) {
         $returnData = $json_data->rd;
         $_SESSION['returnData'] = $returnData;
@@ -82,6 +82,14 @@ if (isset($response["variable"]["BL"][0]) && isset($response["variable"]["CQ"][0
     if (isset($response["variable"]["AE"][0])) {
         $_SESSION["fullname"] = $response["variable"]["AE"][0];
     }
+
+    $_SESSION["attributes"] = [];
+    if (isset($response["variable"]["XA"][0])) {
+        $_SESSION["attributes"]["department"] = $response["variable"]["XA"][0];
+    }
+    if (isset($response["variable"]["BD"][0])) {
+        $_SESSION["attributes"]["postalAddress"] = trim($response["variable"]["BD"][0]);
+    }    
     $_SESSION["uid"] = $codex->decrypt($encrypted_un);
     $_SESSION["custid"] = $json_data->custid;
     $connectorResponse["valid"] = "Y";
