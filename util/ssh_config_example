@@ -1,0 +1,7 @@
+Host [server host/IP]
+        LocalForward 0.0.0.0:[port] localhost:[port]
+        User [username]
+        IdentityFile ~/.ssh/[rsa key]
+        RequestTTY no
+        ExitOnForwardFailure yes
+        LogLevel DEBUG

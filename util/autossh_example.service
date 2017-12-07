@@ -1,0 +1,10 @@
+[Unit]
+Description=AutoSSH tunnel service for OpenAthens Connectors to [customer] server
+After=network.target
+
+[Service]
+Environment="AUTOSSH_GATETIME=0"
+ExecStart=/usr/bin/autossh -M 0 -N [server hostname/IP]
+
+[Install]
+WantedBy=multi-user.target
