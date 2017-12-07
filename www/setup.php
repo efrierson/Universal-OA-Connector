@@ -17,7 +17,8 @@
         <div id="login">
             <div id="custid-section">
                 <h2>Customer/Organization ID</h2>
-                <input type="text" id="custid" placeholder="OpenAthens CustID" /> <img src="includes/info.png" title="It is highly recommended you use the customer's OpenAthens account ID." /><br />
+                <input type="text" id="custid" placeholder="OpenAthens CustID" /> <img src="includes/info.png" title="It is highly recommended you use the customer's OpenAthens account ID." /><br /><br />
+                <button onclick="oaloadconfig();">Load Existing Configuration</button>
             </div>
             <div id="ils-type">
                 <h2>ILS Type</h2>
