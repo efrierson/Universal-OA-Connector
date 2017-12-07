@@ -5,11 +5,11 @@
     $post = file_get_contents('php://input');
     $json_data = json_decode($post);
 
-    echo var_export($json_data,TRUE);
+    //echo var_export($json_data,TRUE);
     
     $custid = $json_data->custid;
     $filename = "../../conf/".$custid."-branding.json";
     $filewrite = file_put_contents($filename, $post);
     
-    echo "<strong>File Created / Updated:</strong> <br/><br/>".file_get_contents($filename);
+    echo "<h2>Test Out Branding</h2><p><a href='login.php?organization=".$custid."&returnData=fake' target='_blank'>See Login Screen for ".$custid."</a></p>";
 ?>

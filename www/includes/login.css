@@ -83,3 +83,22 @@ body {
     max-width: 600px;
     margin: 20px auto;
 }
+
+.ui-tooltip {
+    background-color: white;
+    padding: 10px;
+    border: thin solid #CCCCCC;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, .2);
+    width: 250px;
+}
+
+.ui-helper-hidden-accessible {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
