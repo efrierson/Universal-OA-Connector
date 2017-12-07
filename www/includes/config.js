@@ -16,12 +16,10 @@ function oaloadbranding () {
         },
         success: function(configfile)
         {
-            console.log("Config Status",configfile.status);
             if (configfile.status) {
                 alert("Sorry, can't find a branding configutation for "+custid);
                 return;
             }
-            console.log(configfile);
             $("#logo").val(configfile.logo);
             $("#titletext").val(configfile.titletext);
             $("#barcode-label").val(configfile.barcodelabel);
@@ -61,7 +59,6 @@ function oaloadconfig () {
                 alert("Sorry, can't find a configutation for "+custid);
                 return;
             }
-            console.log(configfile);
             $("#oaapiendpoint").val(configfile.oaendpoint);
             $("#oaconnectionid").val(configfile.oaconnectionid);
             $("#oaapikey").val(configfile.oaapikey);
