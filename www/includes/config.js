@@ -1,4 +1,88 @@
 
+function oaloadbranding () {
+    var custid = $('#custid').val();
+    if (custid.length <= 0) {
+        alert("Enter in an ID, and try again.");
+        return;
+    }
+    $.ajax({
+        url:'includes/loadconfig.php?organization='+custid+'-branding',
+        type: 'GET',
+        dataType: 'json',
+        error: function()
+        {
+            alert("Sorry, can't find a branding configuration for "+custid);
+            return;
+        },
+        success: function(configfile)
+        {
+            console.log("Config Status",configfile.status);
+            if (configfile.status) {
+                alert("Sorry, can't find a branding configutation for "+custid);
+                return;
+            }
+            console.log(configfile);
+            $("#logo").val(configfile.logo);
+            $("#titletext").val(configfile.titletext);
+            $("#barcode-label").val(configfile.barcodelabel);
+            $("#barcode-placeholder").val(configfile.barcodeplaceholder);
+            $("#pin-label").val(configfile.pinlabel);
+            $("#pin-placeholder").val(configfile.pinplaceholder);
+            $("#login-button").val(configfile.loginbutton);
+            $("#helptext").val(configfile.helptext);
+            $("#type").val(configfile.type);
+            showConfig();
+        }
+    });
+}
+
+function oaloadconfig () {
+
+    var encrypt = new JSEncrypt();
+    encrypt.setPublicKey($('#pubkey').val());
+
+    var custid = $('#custid').val();
+    if (custid.length <= 0) {
+        alert("Enter in an ID, and try again.");
+        return;
+    }
+    $.ajax({
+        url:'includes/loadconfig.php?organization='+custid,
+        type: 'GET',
+        dataType: 'json',
+        error: function()
+        {
+            alert("Sorry, can't find a configuration for "+custid);
+            return;
+        },
+        success: function(configfile)
+        {
+            if (configfile.status) {
+                alert("Sorry, can't find a configutation for "+custid);
+                return;
+            }
+            console.log(configfile);
+            $("#oaapiendpoint").val(configfile.oaendpoint);
+            $("#oaconnectionid").val(configfile.oaconnectionid);
+            $("#oaapikey").val(configfile.oaapikey);
+            if (configfile.type == "polaris") {
+                $("#polaris-access-id").val(configfile.un);
+                $("#polaris-access-key").val(configfile.pw);
+                $("#polaris-hostname").val(configfile.hostname);
+            }
+            if (configfile.type == "tlc-carl-sip2") {
+                $("#sip2-app-un").val(configfile.un);
+                $("#sip2-app-pw").val(configfile.pw);
+                $("#sip2-location").val(configfile.location);                
+                $("#sip2-hostname").val(configfile.hostname);
+                $("#sip2-port").val(configfile.port);
+            }
+            $("#type").val(configfile.type);                                            
+            showConfig();
+        }
+    });
+}
+
 function brandingconfig () {
     $("#results").html('<img src="includes/loading_sm.gif" />');
 
@@ -11,8 +95,9 @@ function brandingconfig () {
     var titletext = $('#titletext').val();
     var helptext = $('#helptext').val();
     var loginbutton = $('#login-button').val();
+    var type = $('#type').val();
 
-    var payload = {loginbutton:loginbutton,logo:logo,barcodelabel:barcodelabel,barcodeplaceholder:barcodeplaceholder,pinlabel:pinlabel,pinplaceholder:pinplaceholder,helptext:helptext,titletext:titletext,custid:custid};    
+    var payload = {type:type,loginbutton:loginbutton,logo:logo,barcodelabel:barcodelabel,barcodeplaceholder:barcodeplaceholder,pinlabel:pinlabel,pinplaceholder:pinplaceholder,helptext:helptext,titletext:titletext,custid:custid};    
 
     var url = "includes/config-branding.php";
 

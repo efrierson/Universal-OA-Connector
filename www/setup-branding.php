@@ -11,7 +11,8 @@
         <div id="login">
             <div id="custid-section">
                 <h2>Customer/Organization ID</h2>
-                <input type="text" id="custid" placeholder="CustID" <?php if (isset($_GET['organization'])) { echo 'value="'.$_GET['organization'].'" '; } ?>/><br />
+                <input type="text" id="custid" placeholder="CustID" <?php if (isset($_GET['organization'])) { echo 'value="'.$_GET['organization'].'" '; } ?>/><br /><br />
+                <button onclick="oaloadbranding();">Load Existing Branding</button><br />
             </div>
             <div id="branding-type">
                 <h2>Branding Mode</h2>
