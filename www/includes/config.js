@@ -31,7 +31,6 @@ function brandingconfig () {
     
 }
 
-
 function oaconfig () {
     $("#results").html('<img src="includes/loading_sm.gif" />');
     var encrypt = new JSEncrypt();
@@ -43,6 +42,7 @@ function oaconfig () {
     var connectionid = $('#oaconnectionid').val();
     var oatype = $('#type').val();
     
+    // Driver-specific Configuration
     if (oatype == "tlc-carl-sip2") {   
         var encrypted_un = encrypt.encrypt($('#sip2-app-un').val()); 
         var encrypted_pw = encrypt.encrypt($('#sip2-app-pw').val());
