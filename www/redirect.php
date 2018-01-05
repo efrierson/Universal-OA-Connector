@@ -4,7 +4,7 @@ if (!(isset($_SESSION['valid']) && ($_SESSION['valid'] == "Y"))) {
     die("Something went wrong.");
 }
 
-$config = json_decode(file_get_contents('conf/'.$_SESSION['custid'].'.json'));
+$config = json_decode(file_get_contents('../conf/'.$_SESSION['custid'].'.json'));
 $oa_connectionid = $config->oaconnectionid;
 $oa_endpoint = $config->oaendpoint;
 $oa_apikey = $config->oaapikey;
@@ -23,12 +23,11 @@ if (strlen($user_returnData) > 0) {
     }
     $request_json["returnData"] = $user_returnData;
 
-    $request_json["attributes"] = [];
-    if (isset($_SESSION["address"])) {
-        $request_json["attributes"]["postalAddress"] = $_SESSION["address"];
-    }
-    if (isset($_SESSION["category"])) {
-        $request_json["attributes"]["department"] = $_SESSION["category"];        
+    if (isset($_SESSION["attributes"])) {
+        $request_json["attributes"] = [];        
+        foreach ($_SESSION["attributes"] as $key => $val) {
+            $request_json["attributes"][$key] = $val;    
+        }
     }
 
     $data_string = json_encode($request_json);
@@ -57,6 +56,7 @@ if (strlen($user_returnData) > 0) {
     $redirect_url = json_decode($html);
 
     if (isset($_GET['verbose'])) {
+        echo "Session Data: ".var_dump($_SESSION)."<br/><br/>";
         echo "Request URL: ".$url."<br/><br />";
         echo "Request Headers: ".var_export($headers,TRUE)."<br/><br/>";
         echo "Request JSON: <textarea>".$data_string."</textarea><hr />";

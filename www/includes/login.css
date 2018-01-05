@@ -17,12 +17,14 @@ body {
 }
 
 #login {
-    margin: 20px auto;
-    width: 340px;
+    margin: 60px auto 20px auto;
+    width: 600px;
     padding: 20px;
-    border: thin solid #999999;
+    border: thin solid #CCCCCC;
+    border-radius: 5px;
     background-color: #EEEEEE;
     text-align: center;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, .2);
 }
 
 #login input {
@@ -66,4 +68,37 @@ body {
     width:300px;
     height:30px;
     font-size: 18px;
+}
+
+#logo {
+    margin-bottom:20px;
+}
+
+#logo img {
+    max-width: 560px;
+    max-height: 120px;
+}
+
+#helptext {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.ui-tooltip {
+    background-color: white;
+    padding: 10px;
+    border: thin solid #CCCCCC;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, .2);
+    width: 250px;
+}
+
+.ui-helper-hidden-accessible {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
 }
