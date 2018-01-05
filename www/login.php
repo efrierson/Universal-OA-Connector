@@ -56,7 +56,7 @@ $type = $config->type;
                 $barcodeplaceholder = "";
             }
             ?>
-            <input type="text" id="login-un" placeholder="<?php echo htmlentities($barcodeplaceholder); ?>" /><br />
+            <input class="login-text" type="text" id="login-un" placeholder="<?php echo htmlentities($barcodeplaceholder); ?>" /><br />
             <?php
             if (strlen($branding->pinlabel) > 0) {
                 echo '<span class="labelfor">'.$branding->pinlabel.'</span><br />';
@@ -67,7 +67,7 @@ $type = $config->type;
                 $pinplaceholder = "";
             }
             ?>
-            <input type="password" id="login-pw" placeholder="<?php echo htmlentities($pinplaceholder); ?>" /><br />
+            <input class="login-text" type="password" id="login-pw" placeholder="<?php echo htmlentities($pinplaceholder); ?>" /><br />
             <div id="warning"></div>
             <?php
             if (strlen($branding->loginbutton) > 0) {
@@ -104,4 +104,11 @@ M68I/cdG7IQrXDXXYQIDAQAB
 -----END PUBLIC KEY-----</textarea>
         </div>
     </body>
+    <script type="text/javascript">
+        $(".login-text").on('keyup', function (e) {
+            if (e.keyCode == 13) {
+                oalogin();
+            }
+        });
+    </script>
 </html>
