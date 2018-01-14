@@ -35,19 +35,25 @@ function oalogin () {
             data: JSON.stringify(payload),
             success: function(data) {
                 if ($("#results").length == 0) {
-                    json_data = JSON.parse(data);
-                    if (json_data.valid == "Y") {
-                        console.log(json_data);
-                        window.location.href="redirect.php";
-                    } else {
-                        $("#warning").html('<div class="warningmessage">'+json_data.message+'</div>');
+                    try {
+                        json_data = JSON.parse(data);
+                        if (json_data.valid == "Y") {
+                            console.log(json_data);
+                            window.location.href="redirect.php";
+                        } else {
+                            $("#warning").html('<div class="warningmessage">'+json_data.message+'</div>');
+                        }    
+                    } catch (err) {
+                        $("#warning").html('<div class="warningmessage">Sorry, something went wrong.  Please let us know at <a href="mailto:support@ebsco.com">support@ebsco.com</a>, and reference LSE-OA-Error-2.</div>');
+                        console.log(err);
+                        console.log(data);
                     }
                 } else {
                     $("#results").html(data);
                 }
             },
             error: function(xhr, status, error) {
-                console.log("Broke");
+                $("#warning").html('<div class="warningmessage">Sorry, something went wrong.  Please let us know at <a href="mailto:support@ebsco.com">support@ebsco.com</a>, and reference LSE-OA-Error-1.</div>');
             }
         });        
     }
