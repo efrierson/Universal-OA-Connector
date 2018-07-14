@@ -1,0 +1,8 @@
+client=yes
+output=stunnel.log
+debug=7
+cert=/Applications/MAMP/htdocs/git-repos/Universal-OA-Connector/dev/highland_tlc.pem
+
+[sip5test]
+accept=127.0.0.1:6401
+connect=sip5test.tlcdelivers.com:6401

@@ -1,0 +1,372 @@
+2017.12.07 16:02:42 LOG7[ui]: Clients allowed=125
+2017.12.07 16:02:42 LOG5[ui]: stunnel 5.44 on x86_64-apple-darwin15.6.0 platform
+2017.12.07 16:02:42 LOG5[ui]: Compiled with OpenSSL 1.0.2m  2 Nov 2017
+2017.12.07 16:02:42 LOG5[ui]: Running  with OpenSSL 1.0.2n  7 Dec 2017
+2017.12.07 16:02:42 LOG5[ui]: Threading:PTHREAD Sockets:POLL,IPv6 TLS:ENGINE,FIPS,OCSP,PSK,SNI
+2017.12.07 16:02:42 LOG7[ui]: errno: (*__error())
+2017.12.07 16:02:42 LOG5[ui]: Reading configuration from file /Applications/MAMP/htdocs/git-repos/Universal-OA-Connector/dev/config
+2017.12.07 16:02:42 LOG5[ui]: UTF-8 byte order mark not detected
+2017.12.07 16:02:42 LOG5[ui]: FIPS mode disabled
+2017.12.07 16:02:42 LOG7[ui]: Compression disabled
+2017.12.07 16:02:42 LOG7[ui]: PRNG seeded successfully
+2017.12.07 16:02:42 LOG6[ui]: Initializing service [sip5test]
+2017.12.07 16:02:42 LOG7[ui]: Ciphers: HIGH:!DH:!aNULL:!SSLv2
+2017.12.07 16:02:42 LOG7[ui]: TLS options: 0x03000004 (+0x03000000, -0x00000000)
+2017.12.07 16:02:42 LOG6[ui]: Loading certificate from file: /Applications/MAMP/htdocs/git-repos/Universal-OA-Connector/dev/highland_tlc.pem
+2017.12.07 16:02:42 LOG6[ui]: Certificate loaded from file: /Applications/MAMP/htdocs/git-repos/Universal-OA-Connector/dev/highland_tlc.pem
+2017.12.07 16:02:42 LOG6[ui]: Loading private key from file: /Applications/MAMP/htdocs/git-repos/Universal-OA-Connector/dev/highland_tlc.pem
+2017.12.07 16:02:42 LOG4[ui]: Insecure file permissions on /Applications/MAMP/htdocs/git-repos/Universal-OA-Connector/dev/highland_tlc.pem
+2017.12.07 16:02:46 LOG6[ui]: Private key loaded from file: /Applications/MAMP/htdocs/git-repos/Universal-OA-Connector/dev/highland_tlc.pem
+2017.12.07 16:02:46 LOG7[ui]: Private key check succeeded
+2017.12.07 16:02:46 LOG4[ui]: Service [sip5test] needs authentication to prevent MITM attacks
+2017.12.07 16:02:46 LOG5[ui]: Configuration successful
+2017.12.07 16:02:46 LOG7[ui]: Binding service [sip5test]
+2017.12.07 16:02:46 LOG7[ui]: Listening file descriptor created (FD=6)
+2017.12.07 16:02:46 LOG7[ui]: Option SO_REUSEADDR set on accept socket
+2017.12.07 16:02:46 LOG7[ui]: Service [sip5test] (FD=6) bound to 127.0.0.1:6401
+2017.12.07 16:02:46 LOG7[main]: No pid file being created
+2017.12.07 16:02:46 LOG7[cron]: Cron thread initialized
+2017.12.07 16:03:33 LOG7[main]: Found 1 ready file descriptor(s)
+2017.12.07 16:03:33 LOG7[main]: FD=4 events=0x1 revents=0x0
+2017.12.07 16:03:33 LOG7[main]: FD=6 events=0x1 revents=0x1
+2017.12.07 16:03:33 LOG7[main]: Service [sip5test] accepted (FD=3) from 127.0.0.1:63684
+2017.12.07 16:03:33 LOG7[0]: Service [sip5test] started
+2017.12.07 16:03:33 LOG7[0]: Option TCP_NODELAY set on local socket
+2017.12.07 16:03:33 LOG5[0]: Service [sip5test] accepted connection from 127.0.0.1:63684
+2017.12.07 16:03:33 LOG6[0]: s_connect: connecting 204.111.112.96:6401
+2017.12.07 16:03:33 LOG7[0]: s_connect: s_poll_wait 204.111.112.96:6401: waiting 10 seconds
+2017.12.07 16:03:33 LOG5[0]: s_connect: connected 204.111.112.96:6401
+2017.12.07 16:03:33 LOG5[0]: Service [sip5test] connected remote server from 10.254.7.24:63685
+2017.12.07 16:03:33 LOG7[0]: Option TCP_NODELAY set on remote socket
+2017.12.07 16:03:33 LOG7[0]: Remote descriptor (FD=9) initialized
+2017.12.07 16:03:33 LOG6[0]: SNI: sending servername: sip5test.tlcdelivers.com
+2017.12.07 16:03:33 LOG6[0]: Peer certificate not required
+2017.12.07 16:03:33 LOG7[0]: TLS state (connect): before/connect initialization
+2017.12.07 16:03:33 LOG7[0]: TLS state (connect): SSLv2/v3 write client hello A
+2017.12.07 16:03:33 LOG7[0]: TLS state (connect): SSLv3 read server hello A
+2017.12.07 16:03:33 LOG6[0]: Certificate verification disabled
+2017.12.07 16:03:33 LOG6[0]: Certificate verification disabled
+2017.12.07 16:03:33 LOG6[0]: Certificate verification disabled
+2017.12.07 16:03:33 LOG6[0]: Certificate verification disabled
+2017.12.07 16:03:33 LOG6[0]: Certificate verification disabled
+2017.12.07 16:03:33 LOG7[0]: TLS state (connect): SSLv3 read server certificate A
+2017.12.07 16:03:33 LOG7[0]: TLS state (connect): SSLv3 read server key exchange A
+2017.12.07 16:03:33 LOG6[0]: Client certificate not requested
+2017.12.07 16:03:33 LOG7[0]: TLS state (connect): SSLv3 read server done A
+2017.12.07 16:03:33 LOG7[0]: TLS state (connect): SSLv3 write client key exchange A
+2017.12.07 16:03:33 LOG7[0]: TLS state (connect): SSLv3 write change cipher spec A
+2017.12.07 16:03:33 LOG7[0]: TLS state (connect): SSLv3 write finished A
+2017.12.07 16:03:33 LOG7[0]: TLS state (connect): SSLv3 flush data
+2017.12.07 16:03:33 LOG7[0]: TLS state (connect): SSLv3 read finished A
+2017.12.07 16:03:33 LOG7[0]:      1 client connect(s) requested
+2017.12.07 16:03:33 LOG7[0]:      1 client connect(s) succeeded
+2017.12.07 16:03:33 LOG7[0]:      0 client renegotiation(s) requested
+2017.12.07 16:03:33 LOG7[0]:      0 session reuse(s)
+2017.12.07 16:03:33 LOG6[0]: TLS connected: new session negotiated
+2017.12.07 16:03:33 LOG7[0]: Peer certificate was cached (7539 bytes)
+2017.12.07 16:03:33 LOG6[0]: Negotiated TLSv1.2 ciphersuite ECDHE-RSA-AES256-GCM-SHA384 (256-bit encryption)
+2017.12.07 16:03:33 LOG7[0]: Compression: null, expansion: null
+2017.12.07 16:03:46 LOG6[cron]: Executing cron jobs
+2017.12.07 16:03:46 LOG6[cron]: Cron jobs completed in 0 seconds
+2017.12.07 16:03:46 LOG7[cron]: Waiting 86400 seconds
+2017.12.07 16:04:59 LOG6[0]: Read socket closed (readsocket)
+2017.12.07 16:04:59 LOG6[0]: Write socket closed (write hangup)
+2017.12.07 16:04:59 LOG7[0]: Sending close_notify alert
+2017.12.07 16:04:59 LOG7[0]: TLS alert (write): warning: close notify
+2017.12.07 16:04:59 LOG6[0]: SSL_shutdown successfully sent close_notify alert
+2017.12.07 16:04:59 LOG5[0]: Connection closed: 5 byte(s) sent to TLS, 0 byte(s) sent to socket
+2017.12.07 16:04:59 LOG7[0]: Remote descriptor (FD=9) closed
+2017.12.07 16:04:59 LOG7[0]: Local descriptor (FD=3) closed
+2017.12.07 16:04:59 LOG7[0]: Service [sip5test] finished (0 left)
+2017.12.07 16:10:35 LOG7[main]: Found 1 ready file descriptor(s)
+2017.12.07 16:10:35 LOG7[main]: FD=4 events=0x1 revents=0x0
+2017.12.07 16:10:35 LOG7[main]: FD=6 events=0x1 revents=0x1
+2017.12.07 16:10:35 LOG7[main]: Service [sip5test] accepted (FD=3) from 127.0.0.1:63810
+2017.12.07 16:10:35 LOG7[1]: Service [sip5test] started
+2017.12.07 16:10:35 LOG7[1]: Option TCP_NODELAY set on local socket
+2017.12.07 16:10:35 LOG5[1]: Service [sip5test] accepted connection from 127.0.0.1:63810
+2017.12.07 16:10:35 LOG6[1]: s_connect: connecting 204.111.112.96:6401
+2017.12.07 16:10:35 LOG7[1]: s_connect: s_poll_wait 204.111.112.96:6401: waiting 10 seconds
+2017.12.07 16:10:35 LOG5[1]: s_connect: connected 204.111.112.96:6401
+2017.12.07 16:10:35 LOG5[1]: Service [sip5test] connected remote server from 10.254.7.24:63811
+2017.12.07 16:10:35 LOG7[1]: Option TCP_NODELAY set on remote socket
+2017.12.07 16:10:35 LOG7[1]: Remote descriptor (FD=9) initialized
+2017.12.07 16:10:35 LOG6[1]: SNI: sending servername: sip5test.tlcdelivers.com
+2017.12.07 16:10:35 LOG6[1]: Peer certificate not required
+2017.12.07 16:10:35 LOG7[1]: TLS state (connect): before/connect initialization
+2017.12.07 16:10:35 LOG7[1]: TLS state (connect): SSLv3 write client hello A
+2017.12.07 16:10:35 LOG7[1]: TLS state (connect): SSLv3 read server hello A
+2017.12.07 16:10:35 LOG6[1]: Certificate verification disabled
+2017.12.07 16:10:35 LOG6[1]: Certificate verification disabled
+2017.12.07 16:10:35 LOG6[1]: Certificate verification disabled
+2017.12.07 16:10:35 LOG6[1]: Certificate verification disabled
+2017.12.07 16:10:35 LOG6[1]: Certificate verification disabled
+2017.12.07 16:10:35 LOG7[1]: TLS state (connect): SSLv3 read server certificate A
+2017.12.07 16:10:35 LOG7[1]: TLS state (connect): SSLv3 read server key exchange A
+2017.12.07 16:10:35 LOG6[1]: Client certificate not requested
+2017.12.07 16:10:35 LOG7[1]: TLS state (connect): SSLv3 read server done A
+2017.12.07 16:10:35 LOG7[1]: TLS state (connect): SSLv3 write client key exchange A
+2017.12.07 16:10:35 LOG7[1]: TLS state (connect): SSLv3 write change cipher spec A
+2017.12.07 16:10:35 LOG7[1]: TLS state (connect): SSLv3 write finished A
+2017.12.07 16:10:35 LOG7[1]: TLS state (connect): SSLv3 flush data
+2017.12.07 16:10:35 LOG7[1]: TLS state (connect): SSLv3 read finished A
+2017.12.07 16:10:35 LOG7[1]:      2 client connect(s) requested
+2017.12.07 16:10:35 LOG7[1]:      2 client connect(s) succeeded
+2017.12.07 16:10:35 LOG7[1]:      0 client renegotiation(s) requested
+2017.12.07 16:10:35 LOG7[1]:      0 session reuse(s)
+2017.12.07 16:10:35 LOG6[1]: TLS connected: new session negotiated
+2017.12.07 16:10:35 LOG7[1]: Deallocating application specific data for session connect address
+2017.12.07 16:10:35 LOG6[1]: Negotiated TLSv1.2 ciphersuite ECDHE-RSA-AES256-GCM-SHA384 (256-bit encryption)
+2017.12.07 16:10:35 LOG7[1]: Compression: null, expansion: null
+2017.12.07 16:10:40 LOG7[1]: TLS alert (read): warning: close notify
+2017.12.07 16:10:40 LOG6[1]: TLS closed (SSL_read)
+2017.12.07 16:10:40 LOG7[1]: Sent socket write shutdown
+2017.12.07 16:10:40 LOG6[1]: Read socket closed (readsocket)
+2017.12.07 16:10:40 LOG7[1]: Sending close_notify alert
+2017.12.07 16:10:40 LOG7[1]: TLS alert (write): warning: close notify
+2017.12.07 16:10:40 LOG6[1]: SSL_shutdown successfully sent close_notify alert
+2017.12.07 16:10:40 LOG5[1]: Connection closed: 4 byte(s) sent to TLS, 0 byte(s) sent to socket
+2017.12.07 16:10:40 LOG7[1]: Remote descriptor (FD=9) closed
+2017.12.07 16:10:40 LOG7[1]: Local descriptor (FD=3) closed
+2017.12.07 16:10:40 LOG7[1]: Service [sip5test] finished (0 left)
+2017.12.07 16:10:52 LOG7[main]: Found 1 ready file descriptor(s)
+2017.12.07 16:10:52 LOG7[main]: FD=4 events=0x1 revents=0x0
+2017.12.07 16:10:52 LOG7[main]: FD=6 events=0x1 revents=0x1
+2017.12.07 16:10:52 LOG7[main]: Service [sip5test] accepted (FD=3) from 127.0.0.1:63814
+2017.12.07 16:10:52 LOG7[2]: Service [sip5test] started
+2017.12.07 16:10:52 LOG7[2]: Option TCP_NODELAY set on local socket
+2017.12.07 16:10:52 LOG5[2]: Service [sip5test] accepted connection from 127.0.0.1:63814
+2017.12.07 16:10:52 LOG6[2]: s_connect: connecting 204.111.112.96:6401
+2017.12.07 16:10:52 LOG7[2]: s_connect: s_poll_wait 204.111.112.96:6401: waiting 10 seconds
+2017.12.07 16:10:52 LOG5[2]: s_connect: connected 204.111.112.96:6401
+2017.12.07 16:10:52 LOG5[2]: Service [sip5test] connected remote server from 10.254.7.24:63815
+2017.12.07 16:10:52 LOG7[2]: Option TCP_NODELAY set on remote socket
+2017.12.07 16:10:52 LOG7[2]: Remote descriptor (FD=9) initialized
+2017.12.07 16:10:52 LOG6[2]: SNI: sending servername: sip5test.tlcdelivers.com
+2017.12.07 16:10:52 LOG6[2]: Peer certificate not required
+2017.12.07 16:10:52 LOG7[2]: TLS state (connect): before/connect initialization
+2017.12.07 16:10:52 LOG7[2]: TLS state (connect): SSLv3 write client hello A
+2017.12.07 16:10:52 LOG7[2]: TLS state (connect): SSLv3 read server hello A
+2017.12.07 16:10:52 LOG7[2]: TLS state (connect): SSLv3 read finished A
+2017.12.07 16:10:52 LOG7[2]: TLS state (connect): SSLv3 write change cipher spec A
+2017.12.07 16:10:52 LOG7[2]: TLS state (connect): SSLv3 write finished A
+2017.12.07 16:10:52 LOG7[2]: TLS state (connect): SSLv3 flush data
+2017.12.07 16:10:52 LOG7[2]:      3 client connect(s) requested
+2017.12.07 16:10:52 LOG7[2]:      3 client connect(s) succeeded
+2017.12.07 16:10:52 LOG7[2]:      0 client renegotiation(s) requested
+2017.12.07 16:10:52 LOG7[2]:      1 session reuse(s)
+2017.12.07 16:10:52 LOG6[2]: TLS connected: previous session reused
+2017.12.07 16:10:56 LOG7[2]: TLS alert (read): warning: close notify
+2017.12.07 16:10:56 LOG6[2]: TLS closed (SSL_read)
+2017.12.07 16:10:56 LOG7[2]: Sent socket write shutdown
+2017.12.07 16:10:56 LOG6[2]: Read socket closed (readsocket)
+2017.12.07 16:10:56 LOG7[2]: Sending close_notify alert
+2017.12.07 16:10:56 LOG7[2]: TLS alert (write): warning: close notify
+2017.12.07 16:10:56 LOG6[2]: SSL_shutdown successfully sent close_notify alert
+2017.12.07 16:10:56 LOG5[2]: Connection closed: 6 byte(s) sent to TLS, 4 byte(s) sent to socket
+2017.12.07 16:10:56 LOG7[2]: Remote descriptor (FD=9) closed
+2017.12.07 16:10:56 LOG7[2]: Local descriptor (FD=3) closed
+2017.12.07 16:10:56 LOG7[2]: Service [sip5test] finished (0 left)
+2017.12.08 16:07:43 LOG7[main]: Found 1 ready file descriptor(s)
+2017.12.08 16:07:43 LOG7[main]: FD=4 events=0x1 revents=0x0
+2017.12.08 16:07:43 LOG7[main]: FD=6 events=0x1 revents=0x1
+2017.12.08 16:07:43 LOG7[main]: Service [sip5test] accepted (FD=3) from 127.0.0.1:50295
+2017.12.08 16:07:43 LOG7[3]: Service [sip5test] started
+2017.12.08 16:07:43 LOG7[3]: Option TCP_NODELAY set on local socket
+2017.12.08 16:07:43 LOG5[3]: Service [sip5test] accepted connection from 127.0.0.1:50295
+2017.12.08 16:07:43 LOG6[3]: s_connect: connecting 204.111.112.96:6401
+2017.12.08 16:07:43 LOG7[3]: s_connect: s_poll_wait 204.111.112.96:6401: waiting 10 seconds
+2017.12.08 16:07:43 LOG5[3]: s_connect: connected 204.111.112.96:6401
+2017.12.08 16:07:43 LOG5[3]: Service [sip5test] connected remote server from 10.254.7.58:50296
+2017.12.08 16:07:43 LOG7[3]: Option TCP_NODELAY set on remote socket
+2017.12.08 16:07:43 LOG7[3]: Remote descriptor (FD=9) initialized
+2017.12.08 16:07:43 LOG6[3]: SNI: sending servername: sip5test.tlcdelivers.com
+2017.12.08 16:07:43 LOG6[3]: Peer certificate not required
+2017.12.08 16:07:43 LOG7[3]: TLS state (connect): before/connect initialization
+2017.12.08 16:07:43 LOG7[3]: TLS state (connect): SSLv3 write client hello A
+2017.12.08 16:07:43 LOG7[3]: TLS state (connect): SSLv3 read server hello A
+2017.12.08 16:07:43 LOG6[3]: Certificate verification disabled
+2017.12.08 16:07:43 LOG6[3]: Certificate verification disabled
+2017.12.08 16:07:43 LOG6[3]: Certificate verification disabled
+2017.12.08 16:07:43 LOG6[3]: Certificate verification disabled
+2017.12.08 16:07:43 LOG6[3]: Certificate verification disabled
+2017.12.08 16:07:43 LOG7[3]: TLS state (connect): SSLv3 read server certificate A
+2017.12.08 16:07:43 LOG7[3]: TLS state (connect): SSLv3 read server key exchange A
+2017.12.08 16:07:43 LOG6[3]: Client certificate not requested
+2017.12.08 16:07:43 LOG7[3]: TLS state (connect): SSLv3 read server done A
+2017.12.08 16:07:43 LOG7[3]: TLS state (connect): SSLv3 write client key exchange A
+2017.12.08 16:07:43 LOG7[3]: TLS state (connect): SSLv3 write change cipher spec A
+2017.12.08 16:07:43 LOG7[3]: TLS state (connect): SSLv3 write finished A
+2017.12.08 16:07:43 LOG7[3]: TLS state (connect): SSLv3 flush data
+2017.12.08 16:07:43 LOG7[3]: TLS state (connect): SSLv3 read finished A
+2017.12.08 16:07:43 LOG7[3]:      4 client connect(s) requested
+2017.12.08 16:07:43 LOG7[3]:      4 client connect(s) succeeded
+2017.12.08 16:07:43 LOG7[3]:      0 client renegotiation(s) requested
+2017.12.08 16:07:43 LOG7[3]:      1 session reuse(s)
+2017.12.08 16:07:43 LOG6[3]: TLS connected: new session negotiated
+2017.12.08 16:07:43 LOG7[3]: Deallocating application specific data for session connect address
+2017.12.08 16:07:43 LOG6[3]: Negotiated TLSv1.2 ciphersuite ECDHE-RSA-AES256-GCM-SHA384 (256-bit encryption)
+2017.12.08 16:07:43 LOG7[3]: Compression: null, expansion: null
+2017.12.08 16:07:53 LOG6[3]: Read socket closed (readsocket)
+2017.12.08 16:07:53 LOG6[3]: Write socket closed (write hangup)
+2017.12.08 16:07:53 LOG7[3]: Sending close_notify alert
+2017.12.08 16:07:53 LOG7[3]: TLS alert (write): warning: close notify
+2017.12.08 16:07:53 LOG6[3]: SSL_shutdown successfully sent close_notify alert
+2017.12.08 16:07:53 LOG5[3]: Connection closed: 4 byte(s) sent to TLS, 4 byte(s) sent to socket
+2017.12.08 16:07:53 LOG7[3]: Remote descriptor (FD=9) closed
+2017.12.08 16:07:53 LOG7[3]: Local descriptor (FD=3) closed
+2017.12.08 16:07:53 LOG7[3]: Service [sip5test] finished (0 left)
+2017.12.08 16:08:46 LOG7[main]: Found 1 ready file descriptor(s)
+2017.12.08 16:08:46 LOG7[main]: FD=4 events=0x1 revents=0x0
+2017.12.08 16:08:46 LOG7[main]: FD=6 events=0x1 revents=0x1
+2017.12.08 16:08:46 LOG7[main]: Service [sip5test] accepted (FD=3) from 127.0.0.1:50316
+2017.12.08 16:08:46 LOG7[4]: Service [sip5test] started
+2017.12.08 16:08:46 LOG7[4]: Option TCP_NODELAY set on local socket
+2017.12.08 16:08:46 LOG5[4]: Service [sip5test] accepted connection from 127.0.0.1:50316
+2017.12.08 16:08:46 LOG6[4]: s_connect: connecting 204.111.112.96:6401
+2017.12.08 16:08:46 LOG7[4]: s_connect: s_poll_wait 204.111.112.96:6401: waiting 10 seconds
+2017.12.08 16:08:46 LOG5[4]: s_connect: connected 204.111.112.96:6401
+2017.12.08 16:08:46 LOG5[4]: Service [sip5test] connected remote server from 10.254.7.58:50317
+2017.12.08 16:08:46 LOG7[4]: Option TCP_NODELAY set on remote socket
+2017.12.08 16:08:46 LOG7[4]: Remote descriptor (FD=9) initialized
+2017.12.08 16:08:46 LOG6[4]: SNI: sending servername: sip5test.tlcdelivers.com
+2017.12.08 16:08:46 LOG6[4]: Peer certificate not required
+2017.12.08 16:08:46 LOG7[4]: TLS state (connect): before/connect initialization
+2017.12.08 16:08:46 LOG7[4]: TLS state (connect): SSLv3 write client hello A
+2017.12.08 16:08:46 LOG7[4]: TLS state (connect): SSLv3 read server hello A
+2017.12.08 16:08:46 LOG7[4]: TLS state (connect): SSLv3 read finished A
+2017.12.08 16:08:46 LOG7[4]: TLS state (connect): SSLv3 write change cipher spec A
+2017.12.08 16:08:46 LOG7[4]: TLS state (connect): SSLv3 write finished A
+2017.12.08 16:08:46 LOG7[4]: TLS state (connect): SSLv3 flush data
+2017.12.08 16:08:46 LOG7[4]:      5 client connect(s) requested
+2017.12.08 16:08:46 LOG7[4]:      5 client connect(s) succeeded
+2017.12.08 16:08:46 LOG7[4]:      0 client renegotiation(s) requested
+2017.12.08 16:08:46 LOG7[4]:      2 session reuse(s)
+2017.12.08 16:08:46 LOG6[4]: TLS connected: previous session reused
+2017.12.08 16:08:47 LOG6[4]: Read socket closed (readsocket)
+2017.12.08 16:08:47 LOG6[4]: Write socket closed (write hangup)
+2017.12.08 16:08:47 LOG7[4]: Sending close_notify alert
+2017.12.08 16:08:47 LOG7[4]: TLS alert (write): warning: close notify
+2017.12.08 16:08:47 LOG6[4]: SSL_shutdown successfully sent close_notify alert
+2017.12.08 16:08:47 LOG5[4]: Connection closed: 103 byte(s) sent to TLS, 141 byte(s) sent to socket
+2017.12.08 16:08:47 LOG7[4]: Remote descriptor (FD=9) closed
+2017.12.08 16:08:47 LOG7[4]: Local descriptor (FD=3) closed
+2017.12.08 16:08:47 LOG7[4]: Service [sip5test] finished (0 left)
+2017.12.08 16:09:20 LOG7[main]: Found 1 ready file descriptor(s)
+2017.12.08 16:09:20 LOG7[main]: FD=4 events=0x1 revents=0x0
+2017.12.08 16:09:20 LOG7[main]: FD=6 events=0x1 revents=0x1
+2017.12.08 16:09:20 LOG7[main]: Service [sip5test] accepted (FD=3) from 127.0.0.1:50323
+2017.12.08 16:09:20 LOG7[5]: Service [sip5test] started
+2017.12.08 16:09:20 LOG7[5]: Option TCP_NODELAY set on local socket
+2017.12.08 16:09:20 LOG5[5]: Service [sip5test] accepted connection from 127.0.0.1:50323
+2017.12.08 16:09:20 LOG6[5]: s_connect: connecting 204.111.112.96:6401
+2017.12.08 16:09:20 LOG7[5]: s_connect: s_poll_wait 204.111.112.96:6401: waiting 10 seconds
+2017.12.08 16:09:21 LOG5[5]: s_connect: connected 204.111.112.96:6401
+2017.12.08 16:09:21 LOG5[5]: Service [sip5test] connected remote server from 10.254.7.58:50324
+2017.12.08 16:09:21 LOG7[5]: Option TCP_NODELAY set on remote socket
+2017.12.08 16:09:21 LOG7[5]: Remote descriptor (FD=9) initialized
+2017.12.08 16:09:21 LOG6[5]: SNI: sending servername: sip5test.tlcdelivers.com
+2017.12.08 16:09:21 LOG6[5]: Peer certificate not required
+2017.12.08 16:09:21 LOG7[5]: TLS state (connect): before/connect initialization
+2017.12.08 16:09:21 LOG7[5]: TLS state (connect): SSLv3 write client hello A
+2017.12.08 16:09:21 LOG7[5]: TLS state (connect): SSLv3 read server hello A
+2017.12.08 16:09:21 LOG7[5]: TLS state (connect): SSLv3 read finished A
+2017.12.08 16:09:21 LOG7[5]: TLS state (connect): SSLv3 write change cipher spec A
+2017.12.08 16:09:21 LOG7[5]: TLS state (connect): SSLv3 write finished A
+2017.12.08 16:09:21 LOG7[5]: TLS state (connect): SSLv3 flush data
+2017.12.08 16:09:21 LOG7[5]:      6 client connect(s) requested
+2017.12.08 16:09:21 LOG7[5]:      6 client connect(s) succeeded
+2017.12.08 16:09:21 LOG7[5]:      0 client renegotiation(s) requested
+2017.12.08 16:09:21 LOG7[5]:      3 session reuse(s)
+2017.12.08 16:09:21 LOG6[5]: TLS connected: previous session reused
+2017.12.08 16:09:21 LOG6[5]: Read socket closed (readsocket)
+2017.12.08 16:09:21 LOG6[5]: Write socket closed (write hangup)
+2017.12.08 16:09:21 LOG7[5]: Sending close_notify alert
+2017.12.08 16:09:21 LOG7[5]: TLS alert (write): warning: close notify
+2017.12.08 16:09:21 LOG6[5]: SSL_shutdown successfully sent close_notify alert
+2017.12.08 16:09:21 LOG5[5]: Connection closed: 102 byte(s) sent to TLS, 141 byte(s) sent to socket
+2017.12.08 16:09:21 LOG7[5]: Remote descriptor (FD=9) closed
+2017.12.08 16:09:21 LOG7[5]: Local descriptor (FD=3) closed
+2017.12.08 16:09:21 LOG7[5]: Service [sip5test] finished (0 left)
+2017.12.08 16:09:36 LOG7[main]: Found 1 ready file descriptor(s)
+2017.12.08 16:09:36 LOG7[main]: FD=4 events=0x1 revents=0x0
+2017.12.08 16:09:36 LOG7[main]: FD=6 events=0x1 revents=0x1
+2017.12.08 16:09:36 LOG7[main]: Service [sip5test] accepted (FD=3) from 127.0.0.1:50328
+2017.12.08 16:09:36 LOG7[6]: Service [sip5test] started
+2017.12.08 16:09:36 LOG7[6]: Option TCP_NODELAY set on local socket
+2017.12.08 16:09:36 LOG5[6]: Service [sip5test] accepted connection from 127.0.0.1:50328
+2017.12.08 16:09:36 LOG6[6]: s_connect: connecting 204.111.112.96:6401
+2017.12.08 16:09:36 LOG7[6]: s_connect: s_poll_wait 204.111.112.96:6401: waiting 10 seconds
+2017.12.08 16:09:37 LOG5[6]: s_connect: connected 204.111.112.96:6401
+2017.12.08 16:09:37 LOG5[6]: Service [sip5test] connected remote server from 10.254.7.58:50329
+2017.12.08 16:09:37 LOG7[6]: Option TCP_NODELAY set on remote socket
+2017.12.08 16:09:37 LOG7[6]: Remote descriptor (FD=9) initialized
+2017.12.08 16:09:37 LOG6[6]: SNI: sending servername: sip5test.tlcdelivers.com
+2017.12.08 16:09:37 LOG6[6]: Peer certificate not required
+2017.12.08 16:09:37 LOG7[6]: TLS state (connect): before/connect initialization
+2017.12.08 16:09:37 LOG7[6]: TLS state (connect): SSLv3 write client hello A
+2017.12.08 16:09:37 LOG7[6]: TLS state (connect): SSLv3 read server hello A
+2017.12.08 16:09:37 LOG7[6]: TLS state (connect): SSLv3 read finished A
+2017.12.08 16:09:37 LOG7[6]: TLS state (connect): SSLv3 write change cipher spec A
+2017.12.08 16:09:37 LOG7[6]: TLS state (connect): SSLv3 write finished A
+2017.12.08 16:09:37 LOG7[6]: TLS state (connect): SSLv3 flush data
+2017.12.08 16:09:37 LOG7[6]:      7 client connect(s) requested
+2017.12.08 16:09:37 LOG7[6]:      7 client connect(s) succeeded
+2017.12.08 16:09:37 LOG7[6]:      0 client renegotiation(s) requested
+2017.12.08 16:09:37 LOG7[6]:      4 session reuse(s)
+2017.12.08 16:09:37 LOG6[6]: TLS connected: previous session reused
+2017.12.08 16:09:37 LOG6[6]: Read socket closed (readsocket)
+2017.12.08 16:09:37 LOG6[6]: Write socket closed (write hangup)
+2017.12.08 16:09:37 LOG7[6]: Sending close_notify alert
+2017.12.08 16:09:37 LOG7[6]: TLS alert (write): warning: close notify
+2017.12.08 16:09:37 LOG6[6]: SSL_shutdown successfully sent close_notify alert
+2017.12.08 16:09:37 LOG5[6]: Connection closed: 102 byte(s) sent to TLS, 141 byte(s) sent to socket
+2017.12.08 16:09:37 LOG7[6]: Remote descriptor (FD=9) closed
+2017.12.08 16:09:37 LOG7[6]: Local descriptor (FD=3) closed
+2017.12.08 16:09:37 LOG7[6]: Service [sip5test] finished (0 left)
+2017.12.08 16:09:55 LOG7[main]: Found 1 ready file descriptor(s)
+2017.12.08 16:09:55 LOG7[main]: FD=4 events=0x1 revents=0x0
+2017.12.08 16:09:55 LOG7[main]: FD=6 events=0x1 revents=0x1
+2017.12.08 16:09:55 LOG7[main]: Service [sip5test] accepted (FD=3) from 127.0.0.1:50332
+2017.12.08 16:09:55 LOG7[7]: Service [sip5test] started
+2017.12.08 16:09:55 LOG7[7]: Option TCP_NODELAY set on local socket
+2017.12.08 16:09:55 LOG5[7]: Service [sip5test] accepted connection from 127.0.0.1:50332
+2017.12.08 16:09:55 LOG6[7]: s_connect: connecting 204.111.112.96:6401
+2017.12.08 16:09:55 LOG7[7]: s_connect: s_poll_wait 204.111.112.96:6401: waiting 10 seconds
+2017.12.08 16:09:55 LOG5[7]: s_connect: connected 204.111.112.96:6401
+2017.12.08 16:09:55 LOG5[7]: Service [sip5test] connected remote server from 10.254.7.58:50333
+2017.12.08 16:09:55 LOG7[7]: Option TCP_NODELAY set on remote socket
+2017.12.08 16:09:55 LOG7[7]: Remote descriptor (FD=9) initialized
+2017.12.08 16:09:55 LOG6[7]: SNI: sending servername: sip5test.tlcdelivers.com
+2017.12.08 16:09:55 LOG6[7]: Peer certificate not required
+2017.12.08 16:09:55 LOG7[7]: TLS state (connect): before/connect initialization
+2017.12.08 16:09:55 LOG7[7]: TLS state (connect): SSLv3 write client hello A
+2017.12.08 16:09:55 LOG7[7]: TLS state (connect): SSLv3 read server hello A
+2017.12.08 16:09:55 LOG7[7]: TLS state (connect): SSLv3 read finished A
+2017.12.08 16:09:55 LOG7[7]: TLS state (connect): SSLv3 write change cipher spec A
+2017.12.08 16:09:55 LOG7[7]: TLS state (connect): SSLv3 write finished A
+2017.12.08 16:09:55 LOG7[7]: TLS state (connect): SSLv3 flush data
+2017.12.08 16:09:55 LOG7[7]:      8 client connect(s) requested
+2017.12.08 16:09:55 LOG7[7]:      8 client connect(s) succeeded
+2017.12.08 16:09:55 LOG7[7]:      0 client renegotiation(s) requested
+2017.12.08 16:09:55 LOG7[7]:      5 session reuse(s)
+2017.12.08 16:09:55 LOG6[7]: TLS connected: previous session reused
+2017.12.08 16:09:55 LOG6[7]: Read socket closed (readsocket)
+2017.12.08 16:09:55 LOG6[7]: Write socket closed (write hangup)
+2017.12.08 16:09:55 LOG7[7]: Sending close_notify alert
+2017.12.08 16:09:55 LOG7[7]: TLS alert (write): warning: close notify
+2017.12.08 16:09:55 LOG6[7]: SSL_shutdown successfully sent close_notify alert
+2017.12.08 16:09:55 LOG5[7]: Connection closed: 103 byte(s) sent to TLS, 141 byte(s) sent to socket
+2017.12.08 16:09:55 LOG7[7]: Remote descriptor (FD=9) closed
+2017.12.08 16:09:55 LOG7[7]: Local descriptor (FD=3) closed
+2017.12.08 16:09:55 LOG7[7]: Service [sip5test] finished (0 left)
+2017.12.11 13:26:17 LOG6[cron]: Reopening log file
+2017.12.11 13:26:17 LOG6[cron]: Executing cron jobs
+2017.12.11 13:26:17 LOG7[main]: Found 1 ready file descriptor(s)
+2017.12.11 13:26:17 LOG6[cron]: Cron jobs completed in 249751 seconds
+2017.12.11 13:26:17 LOG7[main]: FD=4 events=0x1 revents=0x1
+2017.12.11 13:26:17 LOG5[cron]: Cron backlog cleared (possible hibernation)
+2017.12.11 13:26:17 LOG7[main]: FD=6 events=0x1 revents=0x0
+2017.12.11 13:26:17 LOG7[cron]: Waiting 9449 seconds
+2017.12.11 13:26:17 LOG7[main]: Dispatching signals from the signal pipe
+2017.12.11 13:26:17 LOG7[main]: Processing SIGNAL_REOPEN_LOG
