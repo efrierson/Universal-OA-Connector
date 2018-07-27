@@ -67,14 +67,19 @@ function oaloadconfig () {
                 $("#polaris-access-key").val(configfile.pw);
                 $("#polaris-hostname").val(configfile.hostname);
             }
+            if (configfile.type == "sierra") {
+                $("#sierra-authkey").val(configfile.un);
+                $("#sierra-authsecret").val(configfile.pw);
+                $("#sierra-hostname").val(configfile.hostname);
+            }
             if (configfile.type == "tlc-carl-sip2") {
                 $("#sip2-app-un").val(configfile.un);
                 $("#sip2-app-pw").val(configfile.pw);
-                $("#sip2-location").val(configfile.location);                
+                $("#sip2-location").val(configfile.location);
                 $("#sip2-hostname").val(configfile.hostname);
                 $("#sip2-port").val(configfile.port);
             }
-            $("#type").val(configfile.type);                                            
+            $("#type").val(configfile.type);
             showConfig();
         }
     });
@@ -94,7 +99,7 @@ function brandingconfig () {
     var loginbutton = $('#login-button').val();
     var type = $('#type').val();
 
-    var payload = {type:type,loginbutton:loginbutton,logo:logo,barcodelabel:barcodelabel,barcodeplaceholder:barcodeplaceholder,pinlabel:pinlabel,pinplaceholder:pinplaceholder,helptext:helptext,titletext:titletext,custid:custid};    
+    var payload = {type:type,loginbutton:loginbutton,logo:logo,barcodelabel:barcodelabel,barcodeplaceholder:barcodeplaceholder,pinlabel:pinlabel,pinplaceholder:pinplaceholder,helptext:helptext,titletext:titletext,custid:custid};
 
     var url = "includes/config-branding.php";
 
@@ -110,7 +115,7 @@ function brandingconfig () {
             console.log(err.Message);
         }
     });
-    
+
 }
 
 function oaconfig () {
@@ -123,24 +128,30 @@ function oaconfig () {
     var apikey = $('#oaapikey').val();
     var connectionid = $('#oaconnectionid').val();
     var oatype = $('#type').val();
-    
+
     // Driver-specific Configuration
-    if (oatype == "tlc-carl-sip2") {   
-        var encrypted_un = encrypt.encrypt($('#sip2-app-un').val()); 
+    if (oatype == "tlc-carl-sip2") {
+        var encrypted_un = encrypt.encrypt($('#sip2-app-un').val());
         var encrypted_pw = encrypt.encrypt($('#sip2-app-pw').val());
         var hostname = $('#sip2-hostname').val();
         var port = $('#sip2-port').val();
         var location = $('#sip2-location').val();
-    
+
         var payload = {pw:encrypted_pw,un:encrypted_un,hostname:hostname,port:port,location:location,custid:custid,oaendpoint:endpoint,oaapikey:apikey,oaconnectionid:connectionid,type:oatype};
     } else if (oatype == "polaris") {
-        var encrypted_un = encrypt.encrypt($('#polaris-access-id').val()); 
+        var encrypted_un = encrypt.encrypt($('#polaris-access-id').val());
         var encrypted_pw = encrypt.encrypt($('#polaris-access-key').val());
-        var hostname = $('#polaris-hostname').val();        
+        var hostname = $('#polaris-hostname').val();
+
+        var payload = {pw:encrypted_pw,un:encrypted_un,hostname:hostname,custid:custid,oaendpoint:endpoint,oaapikey:apikey,oaconnectionid:connectionid,type:oatype};
+    } else if (oatype == "sierra") {
+        var encrypted_un = encrypt.encrypt($('#sierra-authkey').val());
+        var encrypted_pw = encrypt.encrypt($('#sierra-authsecret').val());
+        var hostname = $('#sierra-hostname').val();
 
         var payload = {pw:encrypted_pw,un:encrypted_un,hostname:hostname,custid:custid,oaendpoint:endpoint,oaapikey:apikey,oaconnectionid:connectionid,type:oatype};
     }
-    
+
     var pwcheck = "includes/config.php";
 
     $.ajax({
@@ -155,7 +166,7 @@ function oaconfig () {
             console.log(err.Message);
         }
     });
-    
+
 }
 
 function showConfig () {
