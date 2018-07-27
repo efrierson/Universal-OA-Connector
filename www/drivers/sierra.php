@@ -6,23 +6,21 @@ $_SESSION['fullname'] = "";
 $_SESSION['uid'] = "";
 $_SESSION['custid'] = "";
 require_once("../includes/encryption.php");
-
-$debug = "Y";
-
+$finalresponse = array();
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
-
+$post = file_get_contents('php://input');
 $user_data = json_decode($post);
 $config_data = json_decode(file_get_contents('../../conf/'.$user_data->custid.'.json'));
 
+$debug = $user_data->verbose;
 $encrypted_patron_un = $user_data->un;
 $encrypted_patron_pw = $user_data->pw;
 $codex = new MyEncryption();
 
 $returnData = $user_data->rd;
-//$returnData = "FAKE";
+
 $custID = $user_data->custid;
-//$custID = "FAKE";
 
 //set the authkey provided
 $authkey = $codex->decrypt($config_data->un);
@@ -30,29 +28,31 @@ $authkey = $codex->decrypt($config_data->un);
 
 //set the authsecret provided
 $authsecret = $codex->decrypt($config_data->pw);
-//$authsecret="EBSCO2018USC";
 
 //set baseurl for calls
-$$baseurl = $config_data->hostname;
-//$baseurl ="https://opac.usc.edu.tt/iii/sierra-api/v5/";
-
-
+$baseurl = $config_data->hostname;
 
 //User's barcode
 $barcode = $codex->decrypt($user_data->un);
-//$barcode = "28888888888887";
 
 //User's pin
 $pin = $codex->decrypt($user_data->pw);
-//$pin = "abc12345";
 
 //RUN AUTHENTICATION FUNCTIONS
 $authtoken = Authorize($baseurl,$authkey,$authsecret,$debug);
 if ($authtoken != "invalid"){
   $isValid = validatePatron($baseurl,$authtoken,$barcode,$pin,$debug);
   if ($isValid == "204"){
-    $checkBlocked = checkBlocked($baseurl,$authtoken,$barcode,$debug);
+    $checkBlocked = checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalresponse,$debug);
   }
+  else{
+    $finalresponse['message'] = $isValid;
+    echo json_encode($finalresponse);
+  }
+}
+else{
+  $finalresponse['message'] = "Sierra authentication token issue.  Please contact your library.";
+  echo json_decode($finalresponse);
 }
 
 //Check that key is authorized
@@ -81,7 +81,7 @@ function Authorize($baseurl,$authkey,$authsecret,$debug){
 
   curl_close($ch);
 
-  if ($debug = "Y"){
+  if ($debug == "Y"){
     echo "<b>Output from Service</b>";
     echo "<br><br>";
     echo "Response:".$response;
@@ -131,7 +131,7 @@ function validatePatron($baseurl,$authtoken,$barcode,$pin,$debug){
 
   curl_close($ch);
 
-  if ($debug = "Y"){
+  if ($debug == "Y"){
     echo "<br><b>Output from Patron Service</b>";
     echo "<br>";
     echo "<br>JSON Request: ".$patroninfojson."<br>";
@@ -143,10 +143,17 @@ function validatePatron($baseurl,$authtoken,$barcode,$pin,$debug){
     echo "<hr>";
   }
 
-  return $responsecode;
+  if ($responsecode == "204"){
+      return $responsecode;
+  }
+  else {
+    $responsearray = json_decode($response);
+    return $responsearray->description;
+  }
+
 }
 
-function checkBlocked($baseurl,$authtoken,$barcode,$debug){
+function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalresponse,$debug){
 
   //Set the target URL of patron data
   $statusurl = $baseurl."patrons/find?varFieldTag=b&varFieldContent=".$barcode."&fields=blockInfo%2CexpirationDate%2Cid%2Cnames%2CpatronCodes";
@@ -168,32 +175,44 @@ function checkBlocked($baseurl,$authtoken,$barcode,$debug){
   //get response from curl session
   $response = curl_exec($ch);
   $responsecode = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+  $arrayresponse = json_decode($response);
 
   curl_close($ch);
 
-  if ($debug = "Y"){
+  if ($arrayresponse->blockInfo->code == "-"){
+    $_SESSION["valid"] = "Y";
+    $_SESSION['returnData'] = $returnData;
+    $_SESSION['fullname'] = $arrayresponse->names[0];
+    $_SESSION['custid'] = $custID;
+    $_SESSION['uid'] = $arrayresponse->id;
+    $_SESSION['attributes'] = array();
+    //ADD PCODES
+    foreach($arrayresponse->patronCodes as $key => $value){
+        $_SESSION['attributes'][$key] = $value;
+    }
+    $finalresponse['valid'] = "Y";
+    $finalresponse['returnData'] = $returnData;
+  }
+  else {
+    $finalresponse['message'] = "Patron status is blocked.  Please contact the library for assistance.";
+  }
+
+  if ($debug == "Y"){
     echo "<br><b>Output from Patron Service</b>";
     echo "<br><br>";
     echo "TargetURL: ".$statusurl."<br>";
     echo "Headers sent: ".json_encode($statusheaders)."<br>";
     echo "Response:".$response;
-    $arrayresponse = json_decode($response);
     echo "<br>Blocked Code: ".$arrayresponse->blockInfo->code;
     echo "<br>";
     echo "Response Code: ".$responsecode;
     echo "<br>Name: ".$arrayresponse->names[0];
     echo "<hr>";
+    echo "<br><b>SESSION VARIABLES</b><br>";
+    print_r($_SESSION);
   }
 
-  if ($arrayresponse->blockInfo->code == "-"){
-    $_SESSION["valid"] = "Y";
-    $_SESSION['returnData'] = "";
-    $_SESSION['fullname'] = $arrayresponse->names[0];
-    //$_SESSION['uid'] = "";
-    //$_SESSION['custid'] = "";
-  }
-
+  echo json_encode($finalresponse);
 }
-
 ?>
 
