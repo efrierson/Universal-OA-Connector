@@ -1,7 +1,9 @@
-# OpenAthens Connectors
+# Supported ILS Systems
+* Innovative Interfaces: Sierra
+* Innovative Interfaces: Polaris
+* TLC: Carl.X
 
-These are connectors between OpenAthens and various ILS systems.
-
+# Developer Information
 
 # Live
 ## Production
