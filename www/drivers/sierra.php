@@ -141,6 +141,7 @@ function validatePatron($baseurl,$authtoken,$barcode,$pin,$debug){
     echo "<br>";
     echo "Response Code: ".$responsecode;
     echo "<hr>";
+    echo "Response Array: <textarea>".$responsearray."</textarea>";
   }
 
   if ($responsecode == "204"){
