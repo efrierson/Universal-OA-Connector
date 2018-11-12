@@ -156,7 +156,7 @@ function validatePatron($baseurl,$authtoken,$barcode,$pin,$debug){
 function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalresponse,$debug){
 
   //Set the target URL of patron data
-  $statusurl = $baseurl."patrons/find?varFieldTag=b&varFieldContent=".$barcode."&fields=blockInfo%2CexpirationDate%2Cid%2Cnames%2CpatronCodes%2Cemails";
+  $statusurl = $baseurl."patrons/find?varFieldTag=b&varFieldContent=".$barcode."&fields=blockInfo%2CexpirationDate%2Cid%2Cnames%2CpatronCodes%2Cemails%2ChomeLibraryCode";
 
   //Create POST headers
   $statusheaders = array(
