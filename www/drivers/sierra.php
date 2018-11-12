@@ -141,7 +141,6 @@ function validatePatron($baseurl,$authtoken,$barcode,$pin,$debug){
     echo "<br>";
     echo "Response Code: ".$responsecode;
     echo "<hr>";
-    echo "Response Array: <textarea>".$responsearray."</textarea>";
   }
 
   if ($responsecode == "204"){
@@ -157,7 +156,7 @@ function validatePatron($baseurl,$authtoken,$barcode,$pin,$debug){
 function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalresponse,$debug){
 
   //Set the target URL of patron data
-  $statusurl = $baseurl."patrons/find?varFieldTag=b&varFieldContent=".$barcode."&fields=blockInfo%2CexpirationDate%2Cid%2Cnames%2CpatronCodes";
+  $statusurl = $baseurl."patrons/find?varFieldTag=b&varFieldContent=".$barcode."&fields=blockInfo%2CexpirationDate%2Cid%2Cnames%2CpatronCodes%2Cemails%2ChomeLibraryCode";
 
   //Create POST headers
   $statusheaders = array(
@@ -191,6 +190,20 @@ function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalres
     foreach($arrayresponse->patronCodes as $key => $value){
         $_SESSION['attributes'][$key] = $value;
     }
+    $aname = explode(",",$arrayresponse->names[0]);
+
+    $firstName = (isset($aname[1]) ? trim($aname[1]) : "");
+    $_SESSION['attributes']['firstName'] = $firstName;
+
+    $lastName = (isset($aname[0]) ? trim($aname[0]) : "");
+    $_SESSION['attributes']['lastName'] = $lastName;
+
+    $email = (isset($arrayresponse->emails[0]) ? $arrayresponse->emails[0] : "");
+    $_SESSION['attributes']['email'] = $email;
+
+    $homeLibraryCode = (isset($arrayresponse->homeLibraryCode) ? $arrayresponse->homeLibraryCode : "");
+    $_SESSION['attributes']['homeLibraryCode'] = $homeLibraryCode;
+
     $finalresponse['valid'] = "Y";
     $finalresponse['returnData'] = $returnData;
   }
@@ -208,6 +221,10 @@ function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalres
     echo "<br>";
     echo "Response Code: ".$responsecode;
     echo "<br>Name: ".$arrayresponse->names[0];
+    echo "<br>First Name:".$firstName;
+    echo "<br>Last Name:".$lastName;
+    echo "<br>Email: ".$email;
+    echo "<br>Home Library Code: ".$homeLibraryCode;
     echo "<hr>";
     echo "<br><b>SESSION VARIABLES</b><br>";
     print_r($_SESSION);
