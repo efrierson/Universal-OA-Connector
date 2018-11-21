@@ -46,6 +46,9 @@
       $debug .= "BAD USERNAME OR PASSWORD";
     }
       function getUser($clientID,$hdomain,$patronpassword,$patronID,$returnData,$custID){
+        $sessionToken = "";
+        $userID = "";
+
         $connector_response = [];
         //echo "<strong>Connect Patron ".$patronID."</strong><br/><br/>";
 
@@ -68,9 +71,17 @@
             $error_message = curl_strerror($errno);
         }
         $xmlresult=simplexml_load_string($output);
+        print_r($xmlresult);
 
-        $sessionToken = $xmlresult->sessionToken;
+        $json = json_encode($xmlresult); //NEW
+        $sessiondata = json_decode($json,TRUE); //NEW
 
+        //print_r($sessiondata);
+        if (isset($sessiondata['sessionToken'])){
+          $sessionToken = $sessiondata['sessionToken'];
+          $userID = $sessiondata['userID'];
+        }
+        
         curl_close($ch);
         if ($xmlresult->sessionToken > ""){
           $patronData = [];
@@ -88,6 +99,7 @@
           $_SESSION['fullname'] = $fullName;
           $_SESSION['returnData'] = $returnData;
           $_SESSION['attributes']['email'] = $email;
+          $_SESSION['attributes']['horizonID'] = $userID;
         }
         else {
           $_SESSION['valid'] = "N";
