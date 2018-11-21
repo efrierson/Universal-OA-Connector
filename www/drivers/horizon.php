@@ -7,6 +7,7 @@
     $_SESSION['fullname'] = "";
     $_SESSION['uid'] = "";
     $_SESSION['custid'] = "";
+    $_SESSION['attributes'] = array();
     require_once("../includes/encryption.php");
 
     $debug = "";
@@ -76,15 +77,17 @@
           $patronData['patrondata'] = getPatronData($clientID,$hdomain,$patronpassword,$patronID,$sessionToken);
           $connector_response['valid'] = "Y";
           $connector_response['returnData'] = $returnData;
-          //print_r($patronData);
+          print_r($patronData);
           //echo "</br>Name: ".$patronData['patrondata']['name']."</br>";
           $fullName = $patronData['patrondata']['name'];
+          $email = $patronData['patrondata']['AddressInfo']['email'];
           $connector_response['fullName'] = $fullName;
           $_SESSION['valid'] = "Y";
           $_SESSION['uid'] = $patronID;
           $_SESSION['custid'] = $custID;
           $_SESSION['fullname'] = $fullName;
           $_SESSION['returnData'] = $returnData;
+          $_SESSION['attributes']['email'] = $email;
         }
         else {
           $_SESSION['valid'] = "N";
@@ -103,7 +106,7 @@ function getPatronData($clientID,$hdomain,$patronpassword,$patronID,$sessionToke
 
   //echo "<br \><br \><strong style='color:green;'>Good Patron Data, Starting Lookup...</strong><br \><br \>";
 
-  $targetURL = "https://".$hdomain."/rest/standard/lookupMyAccountInfo?clientID=".$clientID."&sessionToken=".$sessionToken;
+  $targetURL = "https://".$hdomain."/rest/standard/lookupMyAccountInfo?clientID=".$clientID."&sessionToken=".$sessionToken."&includeAddressInfo=true";
 
   $ch = curl_init();
 
@@ -124,6 +127,8 @@ function getPatronData($clientID,$hdomain,$patronpassword,$patronID,$sessionToke
   $xmlresult=simplexml_load_string($output);
   $json = json_encode($xmlresult); //NEW
   $patron_response = json_decode($json,TRUE); //NEW
+
+
   return $patron_response;
 }
     ?>
