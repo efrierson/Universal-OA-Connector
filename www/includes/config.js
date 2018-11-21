@@ -150,10 +150,16 @@ function oaconfig () {
         var hostname = $('#sierra-hostname').val();
 
         var payload = {pw:encrypted_pw,un:encrypted_un,hostname:hostname,custid:custid,oaendpoint:endpoint,oaapikey:apikey,oaconnectionid:connectionid,type:oatype};
+    } else if (oatype == "horizon") {
+        var encrypted_un = encrypt.encrypt($('#horizon-client-id').val());
+        var hostname = $('#horizon-hostname').val();
+
+        var payload = {un:encrypted_un,hostname:hostname,custid:custid,oaendpoint:endpoint,oaapikey:apikey,oaconnectionid:connectionid,type:oatype};
     }
 
-    var pwcheck = "includes/config.php";
 
+    var pwcheck = "includes/config.php";
+    //console.log(payload);
     $.ajax({
         type: "POST",
         url: pwcheck,

@@ -16,7 +16,7 @@ function oalogin () {
     if ($("#results").length > 0) {
         payload.verbose = "Y";
     }
-    console.log(payload);
+    //console.log(payload);
 
     if (type == "tlc-carl-sip2") {
         var pwcheck = "drivers/sip2-tlc-carl.php";
@@ -24,6 +24,8 @@ function oalogin () {
         var pwcheck = "drivers/polaris.php";
     } else if (type == "sierra") {
         var pwcheck = "drivers/sierra.php";
+    }else if (type == "horizon") {
+        var pwcheck = "drivers/horizon.php";
     }else {
         var pwcheck = "unknown";
     }

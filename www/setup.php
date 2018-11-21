@@ -24,6 +24,7 @@
                 <h2>ILS Type</h2>
                 <select id="type" onchange="showConfig();">
                     <option value="none" selected />Select One...</option>
+                    <option value="horizon" />Horizon</option>
                     <option value="polaris" />Polaris</option>
                     <option value="sierra" />Sierra</option>
                     <option value="tlc-carl-sip2" />TLC Carl.x - SIP2</option>
@@ -68,6 +69,14 @@
 
                 <span class="labelfor">Sierra Full API URL</span><br />
                 <input type="text" id="sierra-hostname" placeholder="https://opac.example.edu.tt/iii/sierra-api/v5/" /> <img src="includes/info.png" title="Provided by Library or III" /><br />
+            </div>
+            <div class="ils-section" id="horizon" style="display:none;">
+                <h2>Horizon Information</h2>
+                <span class="labelfor">Horizon ClientID</span><br />
+                <input type="text" id="horizon-client-id" placeholder="clientID" /> <img src="includes/info.png" title="Provided by Library or SIRSI Dynix" /><br />
+
+                <span class="labelfor">Horizon Domain</span><br />
+                <input type="text" id="horizon-hostname" placeholder="server.sirsidynix.net/libcode_ilsws" /> <img src="includes/info.png" title="Provided by Library or SIRSI Dynix" /><br />
             </div>
             <div id="oa-section" class="openAthens">
                 <h2>OpenAthens Information</h2>
