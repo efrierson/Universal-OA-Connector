@@ -81,7 +81,7 @@
           $sessionToken = $sessiondata['sessionToken'];
           $userID = $sessiondata['userID'];
         }
-        
+
         curl_close($ch);
         if ($xmlresult->sessionToken > ""){
           $patronData = [];
@@ -90,8 +90,27 @@
           $connector_response['returnData'] = $returnData;
           print_r($patronData);
           //echo "</br>Name: ".$patronData['patrondata']['name']."</br>";
+
           $fullName = $patronData['patrondata']['name'];
-          $email = $patronData['patrondata']['AddressInfo']['email'];
+          $email = "";
+          if (isset($patronData['patrondata']['AddressInfo']['email'])){
+              $email = $patronData['patrondata']['AddressInfo']['email'];
+          }
+          $locationID = "";
+          if (isset($patronData['patrondata']['locationID'])){
+              $locationID = $patronData['patrondata']['locationID'];
+          }
+
+          $locationDescription = "";
+          if (isset($patronData['patrondata']['locationDescription'])){
+              $locationDescription = $patronData['patrondata']['locationDescription'];
+          }
+
+          $borrowerBarcode = "";
+          if (isset($patronData['patrondata']['borrowerBarcode'])){
+              $borrowerBarcode = $patronData['patrondata']['borrowerBarcode'];
+          }
+
           $connector_response['fullName'] = $fullName;
           $_SESSION['valid'] = "Y";
           $_SESSION['uid'] = $patronID;
@@ -100,6 +119,9 @@
           $_SESSION['returnData'] = $returnData;
           $_SESSION['attributes']['email'] = $email;
           $_SESSION['attributes']['horizonID'] = $userID;
+          $_SESSION['attributes']['locationID'] = $locationID;
+          $_SESSION['attributes']['borrowerBarcode'] = $borrowerBarcode;
+          $_SESSION['attributes']['locationDescription'] = $locationDescription;
         }
         else {
           $_SESSION['valid'] = "N";
