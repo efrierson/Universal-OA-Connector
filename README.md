@@ -2,6 +2,7 @@
 * Innovative Interfaces: Sierra
 * Innovative Interfaces: Polaris
 * TLC: Carl.X
+* SIRSI DYNIX: Horizon
 
 # Developer Information
 
