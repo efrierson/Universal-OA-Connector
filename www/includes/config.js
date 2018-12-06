@@ -72,6 +72,10 @@ function oaloadconfig () {
                 $("#sierra-authsecret").val(configfile.pw);
                 $("#sierra-hostname").val(configfile.hostname);
             }
+            if (configfile.type == "horizon") {
+                $("#horizon-client-id").val(configfile.un);
+                $("#horizon-hostname").val(configfile.hostname);
+            }
             if (configfile.type == "tlc-carl-sip2") {
                 $("#sip2-app-un").val(configfile.un);
                 $("#sip2-app-pw").val(configfile.pw);
