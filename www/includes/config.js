@@ -72,6 +72,10 @@ function oaloadconfig () {
                 $("#sierra-authsecret").val(configfile.pw);
                 $("#sierra-hostname").val(configfile.hostname);
             }
+            if (configfile.type == "horizon") {
+                $("#horizon-client-id").val(configfile.un);
+                $("#horizon-hostname").val(configfile.hostname);
+            }
             if (configfile.type == "tlc-carl-sip2") {
                 $("#sip2-app-un").val(configfile.un);
                 $("#sip2-app-pw").val(configfile.pw);
@@ -150,10 +154,16 @@ function oaconfig () {
         var hostname = $('#sierra-hostname').val();
 
         var payload = {pw:encrypted_pw,un:encrypted_un,hostname:hostname,custid:custid,oaendpoint:endpoint,oaapikey:apikey,oaconnectionid:connectionid,type:oatype};
+    } else if (oatype == "horizon") {
+        var encrypted_un = encrypt.encrypt($('#horizon-client-id').val());
+        var hostname = $('#horizon-hostname').val();
+
+        var payload = {un:encrypted_un,hostname:hostname,custid:custid,oaendpoint:endpoint,oaapikey:apikey,oaconnectionid:connectionid,type:oatype};
     }
 
-    var pwcheck = "includes/config.php";
 
+    var pwcheck = "includes/config.php";
+    //console.log(payload);
     $.ajax({
         type: "POST",
         url: pwcheck,
