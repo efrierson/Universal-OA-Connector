@@ -31,7 +31,7 @@ $codex = new MyEncryption();
 if ($json_data->verbose == "Y") {
     $mysip->debug = true;
 } else {
-    $mysip->debug = false;    
+    $mysip->debug = false;
 }
 $mysip->hostname = $config->hostname;
 $mysip->port = $config->port;
@@ -64,7 +64,14 @@ $mysip->patronpwd = $codex->decrypt($encrypted_pw);
 $in=$mysip->msgPatronStatusRequest();
 $msg_result = $mysip->get_message($in);
 $msg_result =str_replace(array("\r\n","\r","\n"), "", $msg_result);
+
+//checking raw patron response
+$debug .= "<br /><strong>Raw Response: </strong>".$msg_result."<br/>";
+
 $response=$mysip->parsePatronInfoResponse($msg_result);
+
+//checking parsed response
+$debug .= "<br /><strong>Parsed Response Array: </strong>".var_export($response,TRUE)."<br/>";
 
 $mysip->disconnect();
 
@@ -89,7 +96,7 @@ if (isset($response["variable"]["BL"][0]) && isset($response["variable"]["CQ"][0
     }
     if (isset($response["variable"]["BD"][0])) {
         $_SESSION["attributes"]["postalAddress"] = trim($response["variable"]["BD"][0]);
-    }    
+    }
     $_SESSION["uid"] = $codex->decrypt($encrypted_un);
     $_SESSION["custid"] = $json_data->custid;
     $connectorResponse["valid"] = "Y";
