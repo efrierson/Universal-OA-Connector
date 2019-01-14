@@ -68,7 +68,8 @@ $msg_result =str_replace(array("\r\n","\r","\n"), "", $msg_result);
 //checking raw patron response
 $debug .= "<br /><strong>Raw Response: </strong>".$msg_result."<br/>";
 
-$response=$mysip->parsePatronInfoResponse($msg_result);
+//$response=$mysip->parsePatronInfoResponse($msg_result);
+$response=$mysip->parsePatronStatusResponse($msg_result);
 
 //checking parsed response
 $debug .= "<br /><strong>Parsed Response Array: </strong>".var_export($response,TRUE)."<br/>";
