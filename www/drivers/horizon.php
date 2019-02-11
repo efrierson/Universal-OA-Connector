@@ -10,8 +10,6 @@
     $_SESSION['attributes'] = array();
     require_once("../includes/encryption.php");
 
-    $debug = "";
-
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -36,16 +34,18 @@
     $patronpassword = $codex->decrypt($user_data->pw);
     $returnData = $user_data->rd;
     $custID = $user_data->custid;
+    $debug = $user_data->verbose;
     //$patronID = "21250001505045";
     //$patronpassword = "0447";
 
     if ($patronID != "" && $patronpassword != ""){
-      getUser($clientID,$hdomain,$patronpassword,$patronID,$returnData,$custID);
+      getUser($clientID,$hdomain,$patronpassword,$patronID,$returnData,$custID,$debug);
     }
     else{
-      $debug .= "BAD USERNAME OR PASSWORD";
+      echo '{"valid":"N","message":"Missing Username or Password"}';
+      die();
     }
-      function getUser($clientID,$hdomain,$patronpassword,$patronID,$returnData,$custID){
+      function getUser($clientID,$hdomain,$patronpassword,$patronID,$returnData,$custID,$debug){
         $sessionToken = "";
         $userID = "";
 
@@ -71,7 +71,9 @@
             $error_message = curl_strerror($errno);
         }
         $xmlresult=simplexml_load_string($output);
-        print_r($xmlresult);
+        if ($debug=="Y"){
+          print_r($xmlresult);
+        }
 
         $json = json_encode($xmlresult); //NEW
         $sessiondata = json_decode($json,TRUE); //NEW
@@ -85,10 +87,13 @@
         curl_close($ch);
         if ($xmlresult->sessionToken > ""){
           $patronData = [];
-          $patronData['patrondata'] = getPatronData($clientID,$hdomain,$patronpassword,$patronID,$sessionToken);
+          $patronData['patrondata'] = getPatronData($clientID,$hdomain,$patronpassword,$patronID,$sessionToken,$debug);
           $connector_response['valid'] = "Y";
           $connector_response['returnData'] = $returnData;
-          print_r($patronData);
+          if ($debug == "Y"){
+            print_r($patronData);
+          }
+
           //echo "</br>Name: ".$patronData['patrondata']['name']."</br>";
 
           $fullName = $patronData['patrondata']['name'];
@@ -135,7 +140,7 @@
         $connector_response = json_encode($connector_response);
         echo $connector_response;
     }
-function getPatronData($clientID,$hdomain,$patronpassword,$patronID,$sessionToken){
+function getPatronData($clientID,$hdomain,$patronpassword,$patronID,$sessionToken,$debug){
   $patron_response = [];
 
   //echo "<br \><br \><strong style='color:green;'>Good Patron Data, Starting Lookup...</strong><br \><br \>";
