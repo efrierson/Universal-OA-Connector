@@ -26,7 +26,10 @@ function oalogin () {
         var pwcheck = "drivers/sierra.php";
     }else if (type == "horizon") {
         var pwcheck = "drivers/horizon.php";
-    }else {
+    }else if (type == "oclc-wms") {
+        var pwcheck = "drivers/oclc-wms.php";
+    }
+    else {
         var pwcheck = "unknown";
     }
 
@@ -57,7 +60,7 @@ function oalogin () {
                 }
             },
             error: function(xhr, status, error) {
-                $("#warning").html('<div class="warningmessage">Sorry, something went wrong.  Please let us know at <a href="mailto:support@ebsco.com">support@ebsco.com</a>, and reference LSE-OA-Error-1.</div>');
+                $("#warning").html('<div class="warningmessage">Sorry, something went wrong.  Please let us know at <a href="mailto:support@ebsco.com">support@ebsco.com</a>, and reference LSE-OA-Error-1.  '+error+'</div>');
             }
         });
     }
