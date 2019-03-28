@@ -60,7 +60,7 @@ function oalogin () {
                 }
             },
             error: function(xhr, status, error) {
-                $("#warning").html('<div class="warningmessage">Sorry, something went wrong.  Please let us know at <a href="mailto:support@ebsco.com">support@ebsco.com</a>, and reference LSE-OA-Error-1.  '+error+'</div>');
+                $("#warning").html('<div class="warningmessage">Sorry, something went wrong.  Please let us know at <a href="mailto:support@ebsco.com">support@ebsco.com</a>, and reference LSE-OA-Error-1.</div>');
             }
         });
     }
