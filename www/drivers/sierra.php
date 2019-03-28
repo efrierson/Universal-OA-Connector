@@ -29,6 +29,18 @@ $authkey = $codex->decrypt($config_data->un);
 //set the authsecret provided
 $authsecret = $codex->decrypt($config_data->pw);
 
+if (isset($config_data->blocked)){
+  $blockedmessage = $config_data->blocked;
+}
+else {
+  $blockedmessage = "";
+}
+if (isset($config_data->invalid)){
+  $invalid = $config_data->invalid;
+}
+else {
+  $invalid = "";
+}
 //set baseurl for calls
 $baseurl = $config_data->hostname;
 
@@ -43,10 +55,15 @@ $authtoken = Authorize($baseurl,$authkey,$authsecret,$debug);
 if ($authtoken != "invalid"){
   $isValid = validatePatron($baseurl,$authtoken,$barcode,$pin,$debug);
   if ($isValid == "204"){
-    $checkBlocked = checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalresponse,$debug);
+    $checkBlocked = checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalresponse,$debug,$blockedmessage);
   }
   else{
-    $finalresponse['message'] = $isValid;
+    if ($invalid != ""){
+      $finalresponse['message'] = $invalid;
+    }
+    else{
+      $finalresponse['message'] = $isValid;
+    }
     echo json_encode($finalresponse);
   }
 }
@@ -153,7 +170,7 @@ function validatePatron($baseurl,$authtoken,$barcode,$pin,$debug){
 
 }
 
-function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalresponse,$debug){
+function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalresponse,$debug,$blockedmessage){
 
   //Set the target URL of patron data
   $statusurl = $baseurl."patrons/find?varFieldTag=b&varFieldContent=".$barcode."&fields=blockInfo%2CexpirationDate%2Cid%2Cnames%2CpatronCodes%2Cemails%2ChomeLibraryCode";
@@ -208,7 +225,12 @@ function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalres
     $finalresponse['returnData'] = $returnData;
   }
   else {
-    $finalresponse['message'] = "Patron status is blocked.  Please contact the library for assistance.";
+    if ($blockedmessage != ""){
+      $finalresponse['message'] = $blockedmessage;
+    }
+    else{
+      $finalresponse['message'] = "Patron status is blocked.  Please contact the library for assistance.";
+    }
   }
 
   if ($debug == "Y"){

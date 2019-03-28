@@ -26,7 +26,10 @@ function oalogin () {
         var pwcheck = "drivers/sierra.php";
     }else if (type == "horizon") {
         var pwcheck = "drivers/horizon.php";
-    }else {
+    }else if (type == "oclc-wms") {
+        var pwcheck = "drivers/oclc-wms.php";
+    }
+    else {
         var pwcheck = "unknown";
     }
 

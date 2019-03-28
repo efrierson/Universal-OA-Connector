@@ -69,6 +69,13 @@
 
                 <span class="labelfor">Sierra Full API URL</span><br />
                 <input type="text" id="sierra-hostname" placeholder="https://opac.example.edu.tt/iii/sierra-api/v5/" /> <img src="includes/info.png" title="Provided by Library or III" /><br />
+
+                <span class="labelfor">OPTIONAL: Sierra Patron Blocked Message</span><br />
+                <input type="text" id="sierra-blockedmessage" placeholder="Patron status is blocked.  Please contact the library for assistance." /> <img src="includes/info.png" title="OPTIONAL: Provided by Library if Needed" /><br />
+
+                <span class="labelfor">OPTIONAL: Sierra Invalid Patron Message</span><br />
+                <input type="text" id="sierra-invalidmessage" placeholder="Invalid Username or Barcode." /> <img src="includes/info.png" title="OPTIONAL: Provided by Library if Needed" /><br />
+
             </div>
             <div class="ils-section" id="horizon" style="display:none;">
                 <h2>Horizon Information</h2>
