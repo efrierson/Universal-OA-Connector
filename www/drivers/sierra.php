@@ -173,7 +173,7 @@ function validatePatron($baseurl,$authtoken,$barcode,$pin,$debug){
 function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalresponse,$debug,$blockedmessage){
 
   //Set the target URL of patron data
-  $statusurl = $baseurl."patrons/find?varFieldTag=b&varFieldContent=".$barcode."&fields=blockInfo%2CexpirationDate%2Cid%2Cnames%2CpatronCodes%2Cemails%2ChomeLibraryCode";
+  $statusurl = $baseurl."patrons/find?varFieldTag=b&varFieldContent=".$barcode."&fields=blockInfo%2CexpirationDate%2Cid%2Cnames%2CpatronCodes%2Cemails%2ChomeLibraryCode%2CvarFields%2CfixedFields";
 
   //Create POST headers
   $statusheaders = array(
@@ -221,6 +221,9 @@ function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalres
     $homeLibraryCode = (isset($arrayresponse->homeLibraryCode) ? $arrayresponse->homeLibraryCode : "");
     $_SESSION['attributes']['homeLibraryCode'] = $homeLibraryCode;
 
+    $agency = (isset($arrayresponse->fixedFields->{'86'}->display) ? $arrayresponse->fixedFields->{'86'}->display : "");
+    $_SESSION['attributes']['agency'] = $agency;
+
     $finalresponse['valid'] = "Y";
     $finalresponse['returnData'] = $returnData;
   }
@@ -247,6 +250,7 @@ function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalres
     echo "<br>Last Name:".$lastName;
     echo "<br>Email: ".$email;
     echo "<br>Home Library Code: ".$homeLibraryCode;
+    echo "<br>Agency: ".$agency;
     echo "<hr>";
     echo "<br><b>SESSION VARIABLES</b><br>";
     print_r($_SESSION);
