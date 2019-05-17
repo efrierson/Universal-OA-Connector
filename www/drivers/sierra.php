@@ -224,6 +224,9 @@ function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalres
     $agency = (isset($arrayresponse->fixedFields->{'86'}->display) ? $arrayresponse->fixedFields->{'86'}->display : "");
     $_SESSION['attributes']['agency'] = $agency;
 
+    $patagency = (isset($arrayresponse->fixedFields->{'158'}->value) ? $arrayresponse->fixedFields->{'158'}->value : "");
+    $_SESSION['attributes']['patagency'] = $patagency;
+
     $finalresponse['valid'] = "Y";
     $finalresponse['returnData'] = $returnData;
   }
@@ -251,6 +254,7 @@ function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalres
     echo "<br>Email: ".$email;
     echo "<br>Home Library Code: ".$homeLibraryCode;
     echo "<br>Agency: ".$agency;
+    echo "<br>Pat Agency: ".$patagency;
     echo "<hr>";
     echo "<br><b>SESSION VARIABLES</b><br>";
     print_r($_SESSION);
