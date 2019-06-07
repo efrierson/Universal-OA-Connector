@@ -137,16 +137,27 @@
         if ($xmlresult->AccessToken > ""){
           $patronData = [];
           $patronData['patrondata'] = getPatronData($polarisAccessID,$PAPIKey,$Pdomain,$patronpassword,$patronID,$polarisPatronID);
-          $connector_response['valid'] = "Y";
-          $connector_response['returnData'] = $returnData;
-          //print_r($patronData['patrondata']);
-          $fullName = $patronData['patrondata'][0]->PatronBasicData->NameFirst . " " . $patronData['patrondata'][0]->PatronBasicData->NameLast;
-          $connector_response['fullName'] = $fullName;
-          $_SESSION['valid'] = "Y";
-          $_SESSION['uid'] = $patronID;
-          $_SESSION['custid'] = $custID;
-          $_SESSION['fullname'] = $fullName;
-          $_SESSION['returnData'] = $returnData;
+
+          if (isset($patronData['patrondata'][0]->head->title) && $patronData['patrondata'][0]->head->title == '404 - File or directory not found.'){
+            $_SESSION['valid'] = "N";
+            $_SESSION['uid'] = $patronID;
+            $_SESSION['returnData'] = $returnData;
+            $connector_response['valid'] = "N";
+            $connector_response['message'] = "404 Error - Patron API may be offline.";
+            $connector_response['returnData'] = $returnData;
+          }
+          else{
+            $connector_response['valid'] = "Y";
+            $connector_response['returnData'] = $returnData;
+            //print_r($patronData['patrondata']);
+            $fullName = $patronData['patrondata'][0]->PatronBasicData->NameFirst . " " . $patronData['patrondata'][0]->PatronBasicData->NameLast;
+            $connector_response['fullName'] = $fullName;
+            $_SESSION['valid'] = "Y";
+            $_SESSION['uid'] = $patronID;
+            $_SESSION['custid'] = $custID;
+            $_SESSION['fullname'] = $fullName;
+            $_SESSION['returnData'] = $returnData;
+          }
         }
         else {
           $_SESSION['valid'] = "N";
@@ -154,7 +165,6 @@
           $_SESSION['returnData'] = $returnData;
           $connector_response['valid'] = "N";
           $connector_response['message'] = (string)$xmlresult->ErrorMessage;
-
           $connector_response['returnData'] = $returnData;
         }
         $connector_response = json_encode($connector_response);
