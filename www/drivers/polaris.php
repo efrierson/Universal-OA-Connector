@@ -133,20 +133,32 @@
         $xmlresult=simplexml_load_string($output);
         //echo "<br>Access Token: ".$xmlresult->AccessToken;
         $polarisPatronID = $xmlresult->PatronID;
+
         curl_close($ch);
         if ($xmlresult->AccessToken > ""){
           $patronData = [];
           $patronData['patrondata'] = getPatronData($polarisAccessID,$PAPIKey,$Pdomain,$patronpassword,$patronID,$polarisPatronID);
-          $connector_response['valid'] = "Y";
-          $connector_response['returnData'] = $returnData;
-          //print_r($patronData['patrondata']);
-          $fullName = $patronData['patrondata'][0]->PatronBasicData->NameFirst . " " . $patronData['patrondata'][0]->PatronBasicData->NameLast;
-          $connector_response['fullName'] = $fullName;
-          $_SESSION['valid'] = "Y";
-          $_SESSION['uid'] = $patronID;
-          $_SESSION['custid'] = $custID;
-          $_SESSION['fullname'] = $fullName;
-          $_SESSION['returnData'] = $returnData;
+
+          if (isset($patronData['patrondata']['httpcode']) && $patronData['patrondata']['httpcode'] != "200"){
+            $_SESSION['valid'] = "N";
+            $_SESSION['uid'] = $patronID;
+            $_SESSION['returnData'] = $returnData;
+            $connector_response['valid'] = "N";
+            $connector_response['message'] = "Unexpected response.  Polaris service may be unreachable.  Returned HTTP Code ".$patronData['patrondata']['httpcode'].".";
+            $connector_response['returnData'] = $returnData;
+          }
+          else{
+            $connector_response['valid'] = "Y";
+            $connector_response['returnData'] = $returnData;
+            //print_r($patronData['patrondata']);
+            $fullName = $patronData['patrondata'][0]->PatronBasicData->NameFirst . " " . $patronData['patrondata'][0]->PatronBasicData->NameLast;
+            $connector_response['fullName'] = $fullName;
+            $_SESSION['valid'] = "Y";
+            $_SESSION['uid'] = $patronID;
+            $_SESSION['custid'] = $custID;
+            $_SESSION['fullname'] = $fullName;
+            $_SESSION['returnData'] = $returnData;
+          }
         }
         else {
           $_SESSION['valid'] = "N";
@@ -154,7 +166,6 @@
           $_SESSION['returnData'] = $returnData;
           $connector_response['valid'] = "N";
           $connector_response['message'] = (string)$xmlresult->ErrorMessage;
-
           $connector_response['returnData'] = $returnData;
         }
         $connector_response = json_encode($connector_response);
@@ -193,6 +204,7 @@ function getPatronData($polarisAccessID,$PAPIKey,$Pdomain,$patronpassword,$patro
 
   //echo "<br /><strong>Result from Call to Patron Data:</strong><br/>";
   $output = curl_exec($ch);
+  $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
   //echo "<textarea height='200' width='100%'>".$output."</textarea>";
   if($errno = curl_errno($ch)) {
       $error_message = curl_strerror($errno);
@@ -203,6 +215,7 @@ function getPatronData($polarisAccessID,$PAPIKey,$Pdomain,$patronpassword,$patro
   curl_close($ch);
   $xmlresult=simplexml_load_string($output);
   $patron_response[] = $xmlresult;
+  $patron_response['httpcode'] = $http_code;
   return $patron_response;
 }
     ?>
