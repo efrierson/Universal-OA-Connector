@@ -133,17 +133,18 @@
         $xmlresult=simplexml_load_string($output);
         //echo "<br>Access Token: ".$xmlresult->AccessToken;
         $polarisPatronID = $xmlresult->PatronID;
+
         curl_close($ch);
         if ($xmlresult->AccessToken > ""){
           $patronData = [];
           $patronData['patrondata'] = getPatronData($polarisAccessID,$PAPIKey,$Pdomain,$patronpassword,$patronID,$polarisPatronID);
 
-          if (isset($patronData['patrondata'][0]->head->title) && $patronData['patrondata'][0]->head->title == '404 - File or directory not found.'){
+          if (isset($patronData['patrondata']['httpcode']) && $patronData['patrondata']['httpcode'] != "200"){
             $_SESSION['valid'] = "N";
             $_SESSION['uid'] = $patronID;
             $_SESSION['returnData'] = $returnData;
             $connector_response['valid'] = "N";
-            $connector_response['message'] = "404 Error - Patron API may be offline.";
+            $connector_response['message'] = "Unexpected response.  Polaris service may be unreachable.  Returned HTTP Code ".$patronData['patrondata']['httpcode'].".";
             $connector_response['returnData'] = $returnData;
           }
           else{
@@ -203,6 +204,7 @@ function getPatronData($polarisAccessID,$PAPIKey,$Pdomain,$patronpassword,$patro
 
   //echo "<br /><strong>Result from Call to Patron Data:</strong><br/>";
   $output = curl_exec($ch);
+  $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
   //echo "<textarea height='200' width='100%'>".$output."</textarea>";
   if($errno = curl_errno($ch)) {
       $error_message = curl_strerror($errno);
@@ -213,6 +215,7 @@ function getPatronData($polarisAccessID,$PAPIKey,$Pdomain,$patronpassword,$patro
   curl_close($ch);
   $xmlresult=simplexml_load_string($output);
   $patron_response[] = $xmlresult;
+  $patron_response['httpcode'] = $http_code;
   return $patron_response;
 }
     ?>
