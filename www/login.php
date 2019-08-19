@@ -1,22 +1,59 @@
 <?php
 session_start();
-if ((!isset($_GET['organization'])) || (!isset($_GET['returnData']))) {
-    die("Organization ID or returnData not set.");
+if ((!isset($_GET['organization']))) {
+    die("Organization ID not set.");
 }
-if (!(file_exists('../conf/'.$_GET['organization'].'.json'))) {
-    die("Organization ID not found.");
+  if (strpos($_GET['organization'],"?code") > -1){
+    $org = strstr($_GET['organization'],"?code",true);
+    $code = strstr($_GET['organization'],"=");
+    $code = substr($code,1);
+  }
+  else{
+    $org = $_GET['organization'];
+  }
+  if (!(file_exists('../conf/'.$org.'.json'))) {
+      die("Organization ID not found.");
+  }
+  $config = json_decode(file_get_contents('../conf/'.$org.'.json'));
+
+$type = $config->type;
+if($type == "sierraoauth"){
+
+  $redirecturl = $config->redirect;
+
+  if (isset($code)){
+    $state = $_GET['state'];
+    if(!isset($_GET['verbose'])){
+      header("location: oauthlogin.php?code=".$code."&returnData=".$state."&organization=".$org);
+    }
+    else{
+      header("location: oauthlogin.php?code=".$code."&returnData=".$state."&organization=".$org."&verbose=Y");
+    }
+
+  }
+
+  else{
+
+    if (!isset($_GET['returnData'])) {
+        die("ReturnData not set.");
+    }
+
+    $returndata=$_GET['returnData'];
+    $_SESSION['SierraReturnData'] = $returndata;
+    $_SESSION['oa-organization'] = $org;
+    header("location: ".$redirecturl."&state=".$returndata."&response_type=code");
+    }
+
 }
 
-$config = json_decode(file_get_contents('../conf/'.$_GET['organization'].'.json'));
-
+if (!isset($_GET['returnData'])) {
+    die("ReturnData not set.");
+}
 if (!(file_exists('../conf/'.$_GET['organization'].'-branding.json'))) {
-    $branding = json_decode(file_get_contents('../conf/default-branding.json'));    
+    $branding = json_decode(file_get_contents('../conf/default-branding.json'));
 } else {
     $branding = json_decode(file_get_contents('../conf/'.$_GET['organization'].'-branding.json'));
 }
-
-$type = $config->type;
-
 ?>
 <html>
     <head>

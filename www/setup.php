@@ -27,6 +27,7 @@
                     <option value="horizon" />Horizon</option>
                     <option value="polaris" />Polaris</option>
                     <option value="sierra" />Sierra</option>
+                    <option value="sierraoauth" />Sierra OAuth</option>
                     <option value="tlc-carl-sip2" />TLC Carl.x - SIP2</option>
                 </select> <img src="includes/info.png" title="If you don't see it here, we don't have a connector for it.  Please ask an LSE!" /><br />
             </div>
@@ -75,6 +76,24 @@
 
                 <span class="labelfor">OPTIONAL: Sierra Invalid Patron Message</span><br />
                 <input type="text" id="sierra-invalidmessage" placeholder="Invalid Username or Barcode." /> <img src="includes/info.png" title="OPTIONAL: Provided by Library if Needed" /><br />
+
+            </div>
+            <div class="ils-section" id="sierraoauth" style="display:none;">
+                <h2>Sierra OAuth Information</h2>
+                <span class="labelfor">Sierra API AuthKey</span><br />
+                <input type="text" id="sierraoauth-authkey" placeholder="authkey" /> <img src="includes/info.png" title="Provided by Library or III" /><br />
+
+                <span class="labelfor">Sierra API AuthSecret</span><br />
+                <input type="password" id="sierraoauth-authsecret" placeholder="authsecret" /> <img src="includes/info.png" title="Provided by Library or III" /><br />
+
+                <span class="labelfor">Sierra Full API URL</span><br />
+                <input type="text" id="sierraoauth-hostname" placeholder="https://opac.example.edu/iii/sierra-api/v5/" /> <img src="includes/info.png" title="Provided by Library or III" /><br />
+
+                <span class="labelfor">Sierra Login URL</span><br />
+                <input type="text" id="sierraoauth-redirect" placeholder="https://opac.example.edu/iii/sierra-api/authorize" /> <img src="includes/info.png" title="Provided by Library or III" /><br />
+
+                <span class="labelfor">OPTIONAL: Sierra Patron Blocked Message</span><br />
+                <input type="text" id="sierraoauth-blockedmessage" placeholder="Patron status is blocked.  Please contact the library for assistance." /> <img src="includes/info.png" title="OPTIONAL: Provided by Library if Needed" /><br />
 
             </div>
             <div class="ils-section" id="horizon" style="display:none;">
