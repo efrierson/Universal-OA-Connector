@@ -1,48 +1,62 @@
 <?php
 session_start();
+
+//If a state variable was passed, need to do oauth login method
+if (isset($_GET['state'])){
+
+  //make sure we did get a code back
+  if (isset($_GET['code'])){
+
+    $code = $_GET['code'];
+
+    $encodestate = urlencode($_GET['state']);
+    header("location: oauthlogin.php?code=".$code."&state=".$encodestate);
+
+  }
+
+  else{
+    die("Code was not provided.");
+  }
+}
+
 if ((!isset($_GET['organization']))) {
     die("Organization ID not set.");
 }
-  if (strpos($_GET['organization'],"?code") > -1){
-    $org = strstr($_GET['organization'],"?code",true);
-    $code = strstr($_GET['organization'],"=");
-    $code = substr($code,1);
-  }
-  else{
-    $org = $_GET['organization'];
-  }
-  if (!(file_exists('../conf/'.$org.'.json'))) {
-      die("Organization ID not found.");
-  }
-  $config = json_decode(file_get_contents('../conf/'.$org.'.json'));
+
+$org = $_GET['organization'];
+
+if (!(file_exists('../conf/'.$org.'.json'))) {
+    die("Organization ID not found.");
+}
+
+$config = json_decode(file_get_contents('../conf/'.$org.'.json'));
 
 $type = $config->type;
+
 if($type == "sierraoauth"){
+  require_once("includes/encryption.php");
+  $codex = new MyEncryption();
 
   $redirecturl = $config->redirect;
 
-  if (isset($code)){
-    $state = $_GET['state'];
-    if(!isset($_GET['verbose'])){
-      header("location: oauthlogin.php?code=".$code."&returnData=".$state."&organization=".$org);
-    }
-    else{
-      header("location: oauthlogin.php?code=".$code."&returnData=".$state."&organization=".$org."&verbose=Y");
-    }
-
+  if (!isset($_GET['returnData'])) {
+      die("ReturnData not set.");
   }
-
+  if (isset($_GET['verbose']) && ($_GET['verbose'] == "Y")){
+    $verbose = "Y";
+  }
   else{
+    $verbose = "N";
+  }
+  //Build state as json object, then encrypt to send as a variable
+  $statejson = '{"org":"'.$org.'","returnData":"'.$_GET['returnData'].'","verbose":"'.$verbose.'"}';
+  $basejson = $codex->encrypt($statejson);
 
-    if (!isset($_GET['returnData'])) {
-        die("ReturnData not set.");
-    }
+  //must encode any + signs with %2B to properly read later
+  $urljson = rawurlencode(str_replace("+","%2B",$basejson));
 
-    $returndata=$_GET['returnData'];
-    $_SESSION['SierraReturnData'] = $returndata;
-    $_SESSION['oa-organization'] = $org;
-    header("location: ".$redirecturl."&state=".$returndata."&response_type=code");
-    }
+  //navigate to their login site to get code
+  header("location: ".$redirecturl."&state=".$urljson."&response_type=code");
 
 }
 
