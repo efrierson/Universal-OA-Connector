@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require_once("includes/encryption.php");
 $codex = new MyEncryption();
 
@@ -14,7 +13,10 @@ if ((!isset($_GET['code']))) {
 
 //decode state variable, then decrypt and create a PHP object
 $state = rawurldecode($_GET['state']);
-$decodestate = $codex->decrypt($state);
+$decodestate = base64_decode($state);
+if ($decodestate == "" || $decodestate == undefined){
+  die("There was an error with your state value.  Please send this error to your library.");
+}
 $stateobj = json_decode($decodestate);
 
 //set variables, then send request to driver
@@ -40,6 +42,8 @@ $type = $config->type;
  <link rel="stylesheet" href="includes/login.css" />
 </head>
 </body>
+<p><b>Processing Your Request...</b></p>
+<div id="warning"></div>
  <input type="hidden" id="custid" value="<?php echo $org; ?>" />
  <input type="hidden" id="returnData" value="<?php echo $returnData; ?>" />
  <input type="hidden" id="type" value="<?php echo $type; ?>" />
