@@ -74,6 +74,13 @@ function oaloadconfig () {
                 $("#sierra-blockedmessage").val(configfile.blocked);
                 $("#sierra-invalidmessage").val(configfile.invalid);
             }
+            if (configfile.type == "sierraoauth") {
+                $("#sierraoauth-authkey").val(configfile.un);
+                $("#sierraoauth-authsecret").val(configfile.pw);
+                $("#sierraoauth-hostname").val(configfile.hostname);
+                $("#sierraoauth-redirect").val(configfile.redirect);
+                $("#sierraoauth-blockedmessage").val(configfile.blocked);
+            }
             if (configfile.type == "horizon") {
                 $("#horizon-client-id").val(configfile.un);
                 $("#horizon-hostname").val(configfile.hostname);
@@ -158,6 +165,14 @@ function oaconfig () {
         var invalidmsg = $("#sierra-invalidmessage").val();
 
         var payload = {pw:encrypted_pw,un:encrypted_un,hostname:hostname,custid:custid,oaendpoint:endpoint,oaapikey:apikey,oaconnectionid:connectionid,type:oatype,invalid:invalidmsg,blocked:blockedmsg};
+    } else if (oatype == "sierraoauth") {
+        var encrypted_un = encrypt.encrypt($('#sierraoauth-authkey').val());
+        var encrypted_pw = encrypt.encrypt($('#sierraoauth-authsecret').val());
+        var hostname = $('#sierraoauth-hostname').val();
+        var redirect = $('#sierraoauth-redirect').val();
+        var blockedmsg = $("#sierraoauth-blockedmessage").val();
+
+        var payload = {pw:encrypted_pw,un:encrypted_un,hostname:hostname,redirect:redirect,custid:custid,oaendpoint:endpoint,oaapikey:apikey,oaconnectionid:connectionid,type:oatype,blocked:blockedmsg};
     } else if (oatype == "horizon") {
         var encrypted_un = encrypt.encrypt($('#horizon-client-id').val());
         var hostname = $('#horizon-hostname').val();

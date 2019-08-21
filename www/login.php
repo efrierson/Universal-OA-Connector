@@ -1,22 +1,77 @@
 <?php
 session_start();
-if ((!isset($_GET['organization'])) || (!isset($_GET['returnData']))) {
-    die("Organization ID or returnData not set.");
+
+//If a state variable was passed, need to do oauth login method
+if (isset($_GET['state'])){
+
+  //make sure we did get a code back
+  if (isset($_GET['code'])){
+
+    $code = $_GET['code'];
+
+    $encodestate = urlencode($_GET['state']);
+    header("location: oauthlogin.php?code=".$code."&state=".$encodestate);
+
+  }
+
+  else{
+    die("Code was not provided.");
+  }
 }
-if (!(file_exists('../conf/'.$_GET['organization'].'.json'))) {
+
+if ((!isset($_GET['organization']))) {
+    die("Organization ID not set.");
+}
+
+$org = $_GET['organization'];
+
+if (!(file_exists('../conf/'.$org.'.json'))) {
     die("Organization ID not found.");
 }
 
-$config = json_decode(file_get_contents('../conf/'.$_GET['organization'].'.json'));
-
-if (!(file_exists('../conf/'.$_GET['organization'].'-branding.json'))) {
-    $branding = json_decode(file_get_contents('../conf/default-branding.json'));    
-} else {
-    $branding = json_decode(file_get_contents('../conf/'.$_GET['organization'].'-branding.json'));
-}
+$config = json_decode(file_get_contents('../conf/'.$org.'.json'));
 
 $type = $config->type;
 
+if($type == "sierraoauth"){
+  require_once("includes/encryption.php");
+  $codex = new MyEncryption();
+
+  $redirecturl = $config->redirect;
+
+  if (!isset($_GET['returnData'])) {
+      die("ReturnData not set.");
+  }
+  if (isset($_GET['verbose']) && ($_GET['verbose'] == "Y")){
+    $verbose = "Y";
+  }
+  else{
+    $verbose = "N";
+  }
+  //Build state as json object, then encrypt to send as a variable
+  $statearray = array();
+  $statearray['org'] = $org;
+  $statearray['returnData'] = $_GET['returnData'];
+  $statearray['verbose'] = $verbose;
+  $statejson = json_encode($statearray);
+  $basejson = $codex->encrypt($statejson);
+
+  //must encode any + signs with %2B to properly read later
+  $urljson = rawurlencode(str_replace("+","%2B",$basejson));
+
+  //navigate to their login site to get code
+  header("location: ".$redirecturl."&state=".$urljson."&response_type=code");
+
+}
+
+if (!isset($_GET['returnData'])) {
+    die("ReturnData not set.");
+}
+if (!(file_exists('../conf/'.$_GET['organization'].'-branding.json'))) {
+    $branding = json_decode(file_get_contents('../conf/default-branding.json'));
+} else {
+    $branding = json_decode(file_get_contents('../conf/'.$_GET['organization'].'-branding.json'));
+}
 ?>
 <html>
     <head>
