@@ -49,7 +49,11 @@ if($type == "sierraoauth"){
     $verbose = "N";
   }
   //Build state as json object, then encrypt to send as a variable
-  $statejson = '{"org":"'.$org.'","returnData":"'.$_GET['returnData'].'","verbose":"'.$verbose.'"}';
+  $statearray = array();
+  $statearray['org'] = $org;
+  $statearray['returnData'] = $_GET['returnData'];
+  $statearray['verbose'] = $verbose;
+  $statejson = json_encode($statearray);
   $basejson = $codex->encrypt($statejson);
 
   //must encode any + signs with %2B to properly read later

@@ -17,6 +17,7 @@ $state = rawurldecode($_GET['state']);
 $decodestate = $codex->decrypt($state);
 $stateobj = json_decode($decodestate);
 
+//set variables, then send request to driver
 $code = $_GET['code'];
 $org = $stateobj->org;
 $returnData = $stateobj->returnData;
