@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 //If a state variable was passed, need to do oauth login method
 if (isset($_GET['state'])){
 
@@ -54,10 +53,11 @@ if($type == "sierraoauth"){
   $statearray['returnData'] = $_GET['returnData'];
   $statearray['verbose'] = $verbose;
   $statejson = json_encode($statearray);
-  $basejson = $codex->encrypt($statejson);
+  $basejson = base64_encode($statejson);
 
   //must encode any + signs with %2B to properly read later
-  $urljson = rawurlencode(str_replace("+","%2B",$basejson));
+  //$urljson = rawurlencode(str_replace("+","%2B",$basejson));
+  $urljson = rawurlencode($basejson);
 
   //navigate to their login site to get code
   header("location: ".$redirecturl."&state=".$urljson."&response_type=code");
