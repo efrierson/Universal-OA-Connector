@@ -2,7 +2,6 @@
 session_start();
 require_once("includes/encryption.php");
 $codex = new MyEncryption();
-
 if ((!isset($_GET['state']))) {
     die("State was not sent.");
 }
@@ -32,6 +31,30 @@ if (!(file_exists('../conf/'.$org.'.json'))) {
 $config = json_decode(file_get_contents('../conf/'.$org.'.json'));
 
 $type = $config->type;
+
+// Function to get the client`s IP address
+function getIPAddress()
+{
+    if (!empty($_SERVER['HTTP_CLIENT_IP'] ))
+        $ip=$_SERVER['HTTP_CLIENT_IP'];
+    elseif (!empty($_SERVER ['HTTP_X_FORWARDED_FOR'] ))
+        $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+    else
+        $ip=$_SERVER['REMOTE_ADDR'];
+    return $ip;
+}
+//Check if the ip address is valid
+function checkIP(){
+        //Get the ip
+        $ip = getIPAddress();
+        //Check if it belongs to the EDS range or if it is an INTRANET/NAT IP address
+        if ( ( !filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE) || substr($ip, 0, 13 ) == "140.234.255.9" || substr($ip, 0, 13 ) == "140.234.253.9" || substr($ip, 0, 13 ) == "192.231.246.6") && filter_var($ip, FILTER_VALIDATE_IP) ) {
+            return true;
+        }
+        else{
+            return false;
+        }
+}
  ?>
  <html>
      <head>
@@ -49,7 +72,7 @@ $type = $config->type;
  <input type="hidden" id="type" value="<?php echo $type; ?>" />
 <input type="hidden" id="code" value="<?php echo $code; ?>" />
 <?php
-if ($verbose == "Y") {
+if ($verbose == "Y" && checkIP() == true) {
 ?>
 <div id="redirect">
     <a href="redirect.php?verbose=Y">Verbose Redirect</a>
