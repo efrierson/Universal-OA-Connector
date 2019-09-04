@@ -72,6 +72,32 @@ if (!(file_exists('../conf/'.$_GET['organization'].'-branding.json'))) {
 } else {
     $branding = json_decode(file_get_contents('../conf/'.$_GET['organization'].'-branding.json'));
 }
+
+// Function to get the client`s IP address
+function getIPAddress()
+{
+    if (!empty($_SERVER['HTTP_CLIENT_IP'] ))
+        $ip=$_SERVER['HTTP_CLIENT_IP'];
+    elseif (!empty($_SERVER ['HTTP_X_FORWARDED_FOR'] ))
+        $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+    else
+        $ip=$_SERVER['REMOTE_ADDR'];
+    return $ip;
+}
+//Check if the ip address is valid
+function checkIP(){
+
+        //Get the ip
+        $ip = getIPAddress();
+        //Check if it belongs to the EDS range or if it is an INTRANET/NAT IP address
+        if ( ( !filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE) || substr($ip, 0, 13 ) == "140.234.255.9" || substr($ip, 0, 13 ) == "140.234.253.9" || substr($ip, 0, 13 ) == "192.231.246.6") && filter_var($ip, FILTER_VALIDATE_IP) ) {
+            return true;
+        }
+        else{
+            return false;
+        }
+
+}
 ?>
 <html>
     <head>
@@ -137,7 +163,7 @@ if (!(file_exists('../conf/'.$_GET['organization'].'-branding.json'))) {
             echo '<div id="helptext">'.$branding->helptext.'</div>';
         } ?>
         <?php
-        if (isset($_GET['verbose']) && ($_GET['verbose'] == "Y")) {
+        if (isset($_GET['verbose']) && ($_GET['verbose'] == "Y") && checkIP()) {
         ?>
         <div id="redirect">
             <a href="redirect.php?verbose=Y">Verbose Redirect</a>
