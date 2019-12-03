@@ -44,6 +44,17 @@ else {
 //set baseurl for calls
 $baseurl = $config_data->hostname;
 
+//Custom fields
+$varFields = array();
+if (isset($config_data->varFields)){
+  $varFields = explode("|",$config_data->varFields);
+}
+
+$fixedFields = array();
+if (isset($config_data->fixedFields)){
+  $fixedFields = explode("|",$config_data->fixedFields);
+}
+
 //User's barcode
 $barcode = $codex->decrypt($user_data->un);
 
@@ -55,7 +66,7 @@ $authtoken = Authorize($baseurl,$authkey,$authsecret,$debug);
 if ($authtoken != "invalid"){
   $isValid = validatePatron($baseurl,$authtoken,$barcode,$pin,$debug);
   if ($isValid == "204"){
-    $checkBlocked = checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalresponse,$debug,$blockedmessage);
+    $checkBlocked = checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalresponse,$debug,$blockedmessage,$varFields,$fixedFields);
   }
   else{
     if ($invalid != ""){
@@ -170,7 +181,7 @@ function validatePatron($baseurl,$authtoken,$barcode,$pin,$debug){
 
 }
 
-function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalresponse,$debug,$blockedmessage){
+function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalresponse,$debug,$blockedmessage,$varFields,$fixedFields){
 
   //Set the target URL of patron data
   $statusurl = $baseurl."patrons/find?varFieldTag=b&varFieldContent=".$barcode."&fields=blockInfo%2CexpirationDate%2Cid%2Cnames%2CpatronCodes%2Cemails%2ChomeLibraryCode%2CvarFields%2CfixedFields";
@@ -227,6 +238,20 @@ function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalres
     $patagency = (isset($arrayresponse->fixedFields->{'158'}->value) ? $arrayresponse->fixedFields->{'158'}->value : "");
     $_SESSION['attributes']['patagency'] = $patagency;
 
+    foreach($varFields as $key => $value){
+      foreach($arrayresponse->varFields as $k => $v){
+        if($v->fieldTag == $value){
+          $_SESSION['attributes']['varField'.$value] = $v->content;
+        }
+      }
+    }
+
+    foreach($fixedFields as $key => $value){
+      if( isset($arrayresponse->fixedFields->{$value}->value)) {
+        $_SESSION['attributes'][str_replace(' ', '', $arrayresponse->fixedFields->{$value}->label)] = $arrayresponse->fixedFields->{$value}->value;
+      }
+    }
+
     $finalresponse['valid'] = "Y";
     $finalresponse['returnData'] = $returnData;
   }
@@ -240,6 +265,8 @@ function checkBlocked($baseurl,$authtoken,$barcode,$returnData,$custID,$finalres
   }
 
   if ($debug == "Y"){
+    print_r($varFields);
+    print_r($fixedFields);
     echo "<br><b>Output from Patron Service</b>";
     echo "<br><br>";
     echo "TargetURL: ".$statusurl."<br>";

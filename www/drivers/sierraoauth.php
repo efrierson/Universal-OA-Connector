@@ -49,6 +49,17 @@ $code = $user_data->code;
 //redirect
 $redirect = $config_data->redirect;
 
+//Custom fields
+$varFields = array();
+if (isset($config_data->varFields)){
+  $varFields = explode("|",$config_data->varFields);
+}
+
+$fixedFields = array();
+if (isset($config_data->fixedFields)){
+  $fixedFields = explode("|",$config_data->fixedFields);
+}
+
 //GET PATRON AUTH USING CODE
 $patronAuthKey = getPatronAuth($baseurl,$authkey,$authsecret,$code,$custID,$redirect,$debug);
 if ($patronAuthKey != "invalid"){
@@ -58,7 +69,7 @@ if ($patronAuthKey != "invalid"){
     //RUN AUTHENTICATION FUNCTIONS
     $authtoken = Authorize($baseurl,$authkey,$authsecret,$debug);
     if ($authtoken != "invalid"){
-      $checkBlocked = checkBlocked($baseurl,$authtoken,$patronId,$returnData,$custID,$finalresponse,$debug,$blockedmessage);
+      $checkBlocked = checkBlocked($baseurl,$authtoken,$patronId,$returnData,$custID,$finalresponse,$debug,$blockedmessage,$varFields,$fixedFields);
     }
     else{
       $finalresponse['message'] = "Sierra authentication token issue.  Please contact your library.";
@@ -187,7 +198,7 @@ function Authorize($baseurl,$authkey,$authsecret,$debug){
   }
 }
 
-function checkBlocked($baseurl,$authtoken,$patronId,$returnData,$custID,$finalresponse,$debug,$blockedmessage){
+function checkBlocked($baseurl,$authtoken,$patronId,$returnData,$custID,$finalresponse,$debug,$blockedmessage,$varFields,$fixedFields){
 
   //Set the target URL of patron data
   $statusurl = $baseurl."patrons/?id=".$patronId."&fields=blockInfo%2CexpirationDate%2Cid%2Cnames%2CpatronCodes%2Cemails%2ChomeLibraryCode%2CvarFields%2CfixedFields";
@@ -244,6 +255,21 @@ function checkBlocked($baseurl,$authtoken,$patronId,$returnData,$custID,$finalre
 
     $patagency = (isset($arrayresponse->fixedFields->{'158'}->value) ? $arrayresponse->fixedFields->{'158'}->value : "");
     $_SESSION['attributes']['patagency'] = $patagency;
+
+    foreach($varFields as $key => $value){
+      foreach($arrayresponse->varFields as $k => $v){
+        if($v->fieldTag == $value){
+          $_SESSION['attributes']['varField'.$value] = $v->content;
+        }
+      }
+    }
+
+    foreach($fixedFields as $key => $value){
+      if( isset($arrayresponse->fixedFields->{$value}->value)) {
+        $_SESSION['attributes'][str_replace(' ', '', $arrayresponse->fixedFields->{$value}->label)] = $arrayresponse->fixedFields->{$value}->value;
+      }
+    }
+
 
     $finalresponse['valid'] = "Y";
     $finalresponse['returnData'] = $returnData;
