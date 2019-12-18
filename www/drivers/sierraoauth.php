@@ -256,6 +256,9 @@ function checkBlocked($baseurl,$authtoken,$patronId,$returnData,$custID,$finalre
     $patagency = (isset($arrayresponse->fixedFields->{'158'}->value) ? $arrayresponse->fixedFields->{'158'}->value : "");
     $_SESSION['attributes']['patagency'] = $patagency;
 
+    //Warning: It's possible for multiple of the same tag to exist.
+    //Currently that will cause the varField value we return to be overwritten
+    //With the last instance of the tag.
     foreach($varFields as $key => $value){
       foreach($arrayresponse->varFields as $k => $v){
         if($v->fieldTag == $value){
@@ -266,7 +269,7 @@ function checkBlocked($baseurl,$authtoken,$patronId,$returnData,$custID,$finalre
 
     foreach($fixedFields as $key => $value){
       if( isset($arrayresponse->fixedFields->{$value}->value)) {
-        $_SESSION['attributes'][str_replace(' ', '', $arrayresponse->fixedFields->{$value}->label)] = $arrayresponse->fixedFields->{$value}->value;
+        $_SESSION['attributes'][urlencode($arrayresponse->fixedFields->{$value}->label)] = $arrayresponse->fixedFields->{$value}->value;
       }
     }
 
