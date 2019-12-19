@@ -77,6 +77,12 @@
                 <span class="labelfor">OPTIONAL: Sierra Invalid Patron Message</span><br />
                 <input type="text" id="sierra-invalidmessage" placeholder="Invalid Username or Barcode." /> <img src="includes/info.png" title="OPTIONAL: Provided by Library if Needed" /><br />
 
+                <span class="labelfor">OPTIONAL: Sierra Custom Fixed Fields</span><br />
+                <input type="text" id="sierra-fixedFields" placeholder="150|135" /> <img src="includes/info.png" title="OPTIONAL: LSE enter pipe delimited list of fixed field codes" /><br />
+
+                <span class="labelfor">OPTIONAL: Sierra Custom Var Fields</span><br />
+                <input type="text" id="sierra-varFields" placeholder="a|b" /> <img src="includes/info.png" title="OPTIONAL: LSE enter pipe delimited list of var field codes" /><br />
+
             </div>
             <div class="ils-section" id="sierraoauth" style="display:none;">
                 <h2>Sierra OAuth Information</h2>
@@ -94,6 +100,12 @@
 
                 <span class="labelfor">OPTIONAL: Sierra Patron Blocked Message</span><br />
                 <input type="text" id="sierraoauth-blockedmessage" placeholder="Patron status is blocked.  Please contact the library for assistance." /> <img src="includes/info.png" title="OPTIONAL: Provided by Library if Needed" /><br />
+
+                <span class="labelfor">OPTIONAL: Sierra Custom Fixed Fields</span><br />
+                <input type="text" id="sierraoauth-fixedFields" placeholder="150|135" /> <img src="includes/info.png" title="OPTIONAL: LSE enter pipe delimited list of fixed field codes" /><br />
+
+                <span class="labelfor">OPTIONAL: Sierra Custom Var Fields</span><br />
+                <input type="text" id="sierraoauth-varFields" placeholder="a|b" /> <img src="includes/info.png" title="OPTIONAL: LSE enter pipe delimited list of var field codes" /><br />
 
             </div>
             <div class="ils-section" id="horizon" style="display:none;">
