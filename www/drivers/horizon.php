@@ -95,8 +95,10 @@
           }
 
           //echo "</br>Name: ".$patronData['patrondata']['name']."</br>";
-
-          $fullName = $patronData['patrondata']['name'];
+          $fullName = "";
+          if (isset($patronData['patrondata']['name'])) {
+            $fullName = $patronData['patrondata']['name'];
+          }
           $email = "";
           if (isset($patronData['patrondata']['AddressInfo']['email'])){
               $email = $patronData['patrondata']['AddressInfo']['email'];
